@@ -2,28 +2,38 @@
 Weekly DevLogs posted at: https://adamelaoud.tumblr.com/
 
 # Future Design Plans
+Income Components:
 	- Intense crafting 
 	- No shops (little purchasing power)
-	- Grindy
+	- Passive gold income/investment system?
+
+Gear Components:
 	- Raids / Bosses with rare drops
 	- Endgame Content
 	- Stats page
 	- Equipable items
+	- System that rewards grinding and effort put into a weapon or tree (Albion inspired)
+	- Grindy
+
+World Components:
 	- Sandbox (create preset buildings *KAG)
 	- Factions
 	- Map separated by faction
-	- Ethnic characters
-	- Turn based (timed turns?)
+
+Combat Components:
 	- Terrain is combat arena (instanced?)
 	- Locations on map designated for combat (battle start teleports both to designated spot)
-	- System that rewards grinding and effort put into a weapon or tree (Albion inspired)
-	- Passive gold income/investment system?
-	- Badges
-	- Rank system
-	- Character customization / skin tone selection
-	- Male / Female options
 	- Badge displayed by health bar
 	- Health bar damage shown as in league (change in color then drop)
+
+Progression Components:
+	- Badges
+	- Rank system
+
+Character Components:
+	- Ethnic characters
+	- Character customization / skin tone selection
+	- Male / Female options
 	- Select from different characters/champions with different skillsets/stats
 
 # Animations
