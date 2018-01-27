@@ -59,6 +59,7 @@ Combat Components:
 	- Locations on map designated for combat (battle start teleports both to designated spot)
 	- Badge displayed by health bar
 	- Health bar damage shown as in league (change in color then drop)
+	- Rune Pages / Enchanting
 
 Progression Components:
 
@@ -113,4 +114,5 @@ Character Components:
 	- Neera: Dark Secrets
 	- The Darkside Detective
 	- Thy Sword
+	- 
 
