@@ -6,9 +6,14 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel {
 	
-	public final int WIDTH = 1024;
-	public final int HEIGHT = 768;
-	public final int SCALE = 1;
+	// dimensions
+	public static final int WIDTH = 1024;
+	public static final int HEIGHT = 768;
+	public static final int SCALE = 2;
+	
+	// game loop
+	private Thread thread;
+	private boolean running;
 
 	public Game() {
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));
