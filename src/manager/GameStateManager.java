@@ -15,7 +15,6 @@ public class GameStateManager {
 	// PauseState
 	private boolean paused;
 	private PauseState pauseState;
-	private MouseManager mm;
 	
 	// GSM Setup
 	private GameState[] gameStates;
@@ -33,7 +32,6 @@ public class GameStateManager {
 	public GameStateManager() {
 		paused = false;
 		pauseState = new PauseState(this);
-		mm = new MouseManager();
 		
 		gameStates = new GameState[NUM_STATES];
 		
@@ -52,7 +50,7 @@ public class GameStateManager {
 				gameStates[state] = new StartupState(this);
 				gameStates[state].init();
 			case MENU: 
-				gameStates[state] = new MenuState(this, mm);
+				gameStates[state] = new MenuState(this);
 				gameStates[state].init();
 			case SELECT:
 				gameStates[state] = new SelectState(this);
