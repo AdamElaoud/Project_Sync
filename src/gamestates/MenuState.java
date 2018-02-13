@@ -22,6 +22,7 @@ public class MenuState extends GameState {
 	}
 
 	public void init() {
+		
 	}
 
 	public void tick() {
@@ -30,7 +31,7 @@ public class MenuState extends GameState {
 
 	public void render(Graphics2D g) {
 		g.setColor(Color.white);
-		g.drawRect(Game.WIDTH / 2 - 50, Game.HEIGHT / 2 - 25, 100, 50);
+		g.drawRect((Game.WIDTH / 2) - 50, (Game.HEIGHT / 2) - 25, 100, 50);
 		
 		
 	}

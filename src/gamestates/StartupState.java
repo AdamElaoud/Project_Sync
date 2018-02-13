@@ -15,8 +15,8 @@ public class StartupState extends GameState {
 	}
 
 	public void tick() {
-		handleInput();
 		// Will fade in logo in this method
+		gsm.setState(GameStateManager.MENU);
 	}
 
 	public void render(Graphics2D g) {
@@ -24,7 +24,7 @@ public class StartupState extends GameState {
 	}
 
 	public void handleInput() {
-		gsm.setState(GameStateManager.MENU);
+		
 	}
 
 }

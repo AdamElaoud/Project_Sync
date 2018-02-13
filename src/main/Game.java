@@ -65,6 +65,7 @@ public class Game extends Canvas implements Runnable, MouseListener {
 			
 			start = System.nanoTime();
 			
+			// process
 			tick();
 			render();
 			

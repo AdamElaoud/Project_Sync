@@ -49,18 +49,24 @@ public class GameStateManager {
 			case STARTUP: 
 				gameStates[state] = new StartupState(this);
 				gameStates[state].init();
+				System.out.println("Startup State Initialized");
+				break;
 			case MENU: 
 				gameStates[state] = new MenuState(this);
 				gameStates[state].init();
+				break;
 			case SELECT:
 				gameStates[state] = new SelectState(this);
 				gameStates[state].init();
+				break;
 			case PLAYTURN:
 				gameStates[state] = new PlayTurnState(this);
 				gameStates[state].init();
+				break;
 			case ENDMATCH:
 				gameStates[state] = new EndMatchState(this);
 				gameStates[state].init();
+				break;
 		}
 	}
 	
@@ -74,25 +80,21 @@ public class GameStateManager {
 		paused = set;
 	}
 	
-	// if paused tick pauseState, otherwise tick currentState
+	// if paused, tick pauseState, otherwise tick currentState
 	public void tick() {
 		if (paused) {
 			pauseState.tick();
-		} else {
-			if (gameStates[currentState] != null) {
-				gameStates[currentState].tick();
-			}
+		} else if (gameStates[currentState] != null) {
+			gameStates[currentState].tick();
 		}
 	}
 	
-	// if paused render pauseState, otherwise render currentState
+	// if paused, render pauseState, otherwise render currentState
 	public void render(Graphics2D g) {
 		if (paused) {
 			pauseState.render(g);
-		} else {
-			if (gameStates[currentState] != null) {
-				gameStates[currentState].render(g);
-			}
+		} else if (gameStates[currentState] != null) {
+			gameStates[currentState].render(g);
 		}
 	}
 	
