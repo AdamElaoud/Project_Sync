@@ -11,7 +11,7 @@ import java.awt.image.BufferStrategy;
 import manager.GameStateManager;
 import manager.MouseManager;
 
-public class Game extends Canvas implements Runnable, MouseListener {
+public class Game extends Canvas implements Runnable {
 	
 	// serialization
 	private static final long serialVersionUID = -3286350852356844220L;
@@ -65,6 +65,9 @@ public class Game extends Canvas implements Runnable, MouseListener {
 			
 			start = System.nanoTime();
 			
+			// setup input
+			addMouseListener(gsm.getCurrentState());
+
 			// process
 			tick();
 			render();
@@ -89,7 +92,6 @@ public class Game extends Canvas implements Runnable, MouseListener {
 		running = true;
 		gsm = new GameStateManager();
 		mm = new MouseManager();
-		addMouseListener(this);
 	}
 	
 	private void tick() {
@@ -120,22 +122,5 @@ public class Game extends Canvas implements Runnable, MouseListener {
 		// makes next available buffer visible
 		bs.show();
 	}
-
-	// Mouse Events
-	@Override
-	public void mouseClicked(MouseEvent button) {}
-	@Override
-	public void mouseEntered(MouseEvent button) {}
-	@Override
-	public void mouseExited(MouseEvent button) {}
-	@Override
-	public void mousePressed(MouseEvent button) {
-		mm.mouseSet(button.getButton(), true);
-	}
-	@Override
-	public void mouseReleased(MouseEvent button) {
-		mm.mouseSet(button.getButton(), true);
-	}
-	
 	
 }

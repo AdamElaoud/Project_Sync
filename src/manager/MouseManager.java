@@ -11,6 +11,9 @@ public class MouseManager {
 	
 	public static final int LMB = 0;
 	public static final int RMB = 1;
+	
+	private int mX;
+	private int mY;
 
 
 	// save values from mouseState in prevMouseState
@@ -40,4 +43,34 @@ public class MouseManager {
 	public boolean isUp(int button) {
 		return !mouseState[button];
 	}
+	
+	// boundary check
+	public boolean withinBoundaries(int mX, int mY, int x, int y, int width, int height) {
+		if (mX >= x && mX <= x + width) {
+			if (mY >= y && mY <= y + height) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	// Setters
+	public void setMX(int mX) {
+		this.mX = mX;
+	}
+
+	public void setMY(int mY) {
+		this.mY = mY;
+	}
+	
+	// Getters
+	public int getMX() {
+		return mX;
+	}
+	
+	public int getmY() {
+		return mY;
+	}
+	
 }

@@ -1,10 +1,12 @@
 package gamestates;
 
 import java.awt.Graphics2D;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import manager.GameStateManager;
 
-public abstract class GameState {
+public abstract class GameState implements MouseListener, MouseMotionListener {
 
 	protected GameStateManager gsm;
 	
