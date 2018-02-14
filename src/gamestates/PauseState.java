@@ -23,10 +23,6 @@ public class PauseState extends GameState {
 		
 	}
 
-	public void handleInput() {
-		
-	}
-
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {
 		

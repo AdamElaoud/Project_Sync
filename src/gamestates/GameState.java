@@ -17,5 +17,4 @@ public abstract class GameState implements MouseListener, MouseMotionListener {
 	public abstract void init();
 	public abstract void tick();
 	public abstract void render(Graphics2D g);
-	public abstract void handleInput();
 }

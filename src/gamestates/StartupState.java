@@ -23,10 +23,6 @@ public class StartupState extends GameState {
 	public void render(Graphics2D g) {
 		// Will display logo in this method
 	}
-
-	public void handleInput() {
-		
-	}
 	
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {

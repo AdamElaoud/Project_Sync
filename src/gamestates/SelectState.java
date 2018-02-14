@@ -22,10 +22,6 @@ public class SelectState extends GameState {
 	public void render(Graphics2D g) {
 		
 	}
-
-	public void handleInput() {
-		
-	}
 	
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {

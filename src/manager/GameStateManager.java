@@ -2,13 +2,7 @@ package manager;
 
 import java.awt.Graphics2D;
 
-import gamestates.EndMatchState;
-import gamestates.GameState;
-import gamestates.MenuState;
-import gamestates.PauseState;
-import gamestates.PlayTurnState;
-import gamestates.SelectState;
-import gamestates.StartupState;
+import gamestates.*;
 
 public class GameStateManager {
 
@@ -24,12 +18,13 @@ public class GameStateManager {
 	private int currentState;
 	private int previousState;
 	
-	public static final int NUM_STATES = 5;
+	public static final int NUM_STATES = 6;
 	public static final int STARTUP = 0;
 	public static final int MENU = 1;
 	public static final int SELECT = 2;
 	public static final int PLAYTURN = 3;
 	public static final int ENDMATCH = 4;
+	public static final int STARTMATCH = 5;
 	
 	// initialize the GSM
 	public GameStateManager() {
@@ -69,6 +64,10 @@ public class GameStateManager {
 				break;
 			case ENDMATCH:
 				gameStates[state] = new EndMatchState(this);
+				gameStates[state].init();
+				break;
+			case STARTMATCH:
+				gameStates[state] = new StartMatchState(this);
 				gameStates[state].init();
 				break;
 		}

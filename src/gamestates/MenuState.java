@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-
 import main.Game;
 import manager.GameStateManager;
 import manager.MouseManager;
@@ -18,6 +15,8 @@ public class MenuState extends GameState {
 	private final int SCALE = Game.SCALE;
 	
 	MouseManager mm;
+	
+	Graphics2D g;
 	
 	private String[] options = {
 			"Play",
@@ -39,7 +38,8 @@ public class MenuState extends GameState {
 		
 	}
 
-	public void render(Graphics2D g) {
+	public void render(Graphics2D graphics) {
+		g = graphics;
 		
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.PLAIN, 140));
@@ -60,20 +60,9 @@ public class MenuState extends GameState {
 		g.drawString(options[2], (WIDTH * SCALE / 2) - 270 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * 4 / 5) + 42);
 		g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 4 / 5) - 96, 512, 192);
 		
-		// Select Highlight
-		// PLAY
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
-			g.setColor(Color.gray);
-			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
-		}
-		
 	}
 
-	public void handleInput() {
-		
-	}
-
-	// Mouse Events
+	// Mouse Events	
 	public void mouseDragged(MouseEvent arg0) {
 		
 	}
@@ -84,12 +73,20 @@ public class MenuState extends GameState {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		
+		// PLAY
+		if (mm.withinBoundaries(e.getX(), e.getY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
+			gsm.setState(GameStateManager.STARTMATCH);
+		}
 	}
 
 	// mouse enters component
 	public void mouseEntered(MouseEvent e) {
-		
+		// Select Highlight
+		// PLAY
+		if (mm.withinBoundaries(e.getX(), e.getY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
+			g.setColor(Color.gray);
+			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
+		}	
 	}
 
 	@Override

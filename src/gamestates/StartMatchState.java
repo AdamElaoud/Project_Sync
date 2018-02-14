@@ -1,16 +1,18 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import main.Game;
 import manager.GameStateManager;
 
-public class PlayTurnState extends GameState {
+public class StartMatchState extends GameState {
 
-	public PlayTurnState(GameStateManager gsm) {
+	public StartMatchState(GameStateManager gsm) {
 		super(gsm);
 	}
-
+	
 	public void init() {
 		
 	}
@@ -20,9 +22,11 @@ public class PlayTurnState extends GameState {
 	}
 
 	public void render(Graphics2D g) {
-		
+		// reset background
+		g.setColor(Color.white);
+		g.fillRect(0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
 	}
-	
+
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {
 		
