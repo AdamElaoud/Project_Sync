@@ -37,7 +37,7 @@ public class MenuState extends GameState {
 	}
 
 	public void tick() {
-		System.out.println("X: " + mX + " Y: " + mY);
+		
 	}
 
 	public void render(Graphics2D graphics) {
@@ -70,6 +70,8 @@ public class MenuState extends GameState {
 		mX = e.getX();
 		mY = e.getY();
 		
+		System.out.println("Dragged, X: " + mX + " Y: " + mY);
+		
 	}
 
 	// mouse moved onto component but not clicked
@@ -77,6 +79,8 @@ public class MenuState extends GameState {
 		// update location
 		mX = e.getX();
 		mY = e.getY();
+		
+		System.out.println("Moved, X: " + mX + " Y: " + mY);
 		
 		// Select Highlight
 		// PLAY
@@ -91,6 +95,8 @@ public class MenuState extends GameState {
 		mX = e.getX();
 		mY = e.getY();
 		
+		System.out.println("Clicked, X: " + mX + " Y: " + mY);
+		
 		// PLAY
 		if (mm.withinBoundaries(mX, mY, (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
 			gsm.setState(GameStateManager.STARTMATCH);
@@ -103,6 +109,8 @@ public class MenuState extends GameState {
 		mX = e.getX();
 		mY = e.getY();
 		
+		System.out.println("Entered, X: " + mX + " Y: " + mY);
+		
 	}
 
 	@Override
@@ -110,6 +118,8 @@ public class MenuState extends GameState {
 		// update location
 		mX = e.getX();
 		mY = e.getY();
+		
+		System.out.println("Exited, X: " + mX + " Y: " + mY);
 		
 	}
 
@@ -119,6 +129,8 @@ public class MenuState extends GameState {
 		mX = e.getX();
 		mY = e.getY();
 		
+		System.out.println("Pressed, X: " + mX + " Y: " + mY);
+		
 	}
 
 	@Override
@@ -126,6 +138,8 @@ public class MenuState extends GameState {
 		// update location
 		mX = e.getX();
 		mY = e.getY();
+		
+		System.out.println("Released, X: " + mX + " Y: " + mY);
 		
 	}
 
