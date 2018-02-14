@@ -13,6 +13,8 @@ public class MenuState extends GameState {
 	private final int WIDTH = Game.WIDTH;
 	private final int HEIGHT = Game.HEIGHT;
 	private final int SCALE = Game.SCALE;
+		
+	private int mX, mY;
 	
 	MouseManager mm;
 	
@@ -20,7 +22,7 @@ public class MenuState extends GameState {
 	
 	private String[] options = {
 			"Play",
-			"Deck",
+			"Decks",
 			"Quit"
 	};
 
@@ -35,7 +37,7 @@ public class MenuState extends GameState {
 	}
 
 	public void tick() {
-		
+		System.out.println("X: " + mX + " Y: " + mY);
 	}
 
 	public void render(Graphics2D graphics) {
@@ -52,8 +54,8 @@ public class MenuState extends GameState {
 		g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
 		
 		
-		// Deck
-		g.drawString(options[1], (WIDTH * SCALE / 2) - 290 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * 3 / 5) + 42);
+		// Decks
+		g.drawString(options[1], (WIDTH * SCALE / 2) - 318 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * 3 / 5) + 42);
 		g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 3 / 5) - 96, 512, 192);
 
 		// Quit
@@ -63,45 +65,67 @@ public class MenuState extends GameState {
 	}
 
 	// Mouse Events	
-	public void mouseDragged(MouseEvent arg0) {
+	public void mouseDragged(MouseEvent e) {
+		// update location
+		mX = e.getX();
+		mY = e.getY();
 		
 	}
 
 	// mouse moved onto component but not clicked
-	public void mouseMoved(MouseEvent arg0) {
+	public void mouseMoved(MouseEvent e) {
+		// update location
+		mX = e.getX();
+		mY = e.getY();
 		
+		// Select Highlight
+		// PLAY
+		if (mm.withinBoundaries(mX, mY, (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
+			g.setColor(Color.gray);
+			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
+		}	
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		// update location
+		mX = e.getX();
+		mY = e.getY();
+		
 		// PLAY
-		if (mm.withinBoundaries(e.getX(), e.getY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
+		if (mm.withinBoundaries(mX, mY, (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
 			gsm.setState(GameStateManager.STARTMATCH);
 		}
 	}
 
 	// mouse enters component
 	public void mouseEntered(MouseEvent e) {
-		// Select Highlight
-		// PLAY
-		if (mm.withinBoundaries(e.getX(), e.getY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
-			g.setColor(Color.gray);
-			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
-		}	
+		// update location
+		mX = e.getX();
+		mY = e.getY();
+		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
+		// update location
+		mX = e.getX();
+		mY = e.getY();
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
+		// update location
+		mX = e.getX();
+		mY = e.getY();
 		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// update location
+		mX = e.getX();
+		mY = e.getY();
 		
 	}
 
