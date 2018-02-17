@@ -7,7 +7,7 @@ import java.awt.event.MouseMotionListener;
 import manager.GameStateManager;
 
 public abstract class GameState implements MouseListener, MouseMotionListener {
-
+	
 	protected GameStateManager gsm;
 	
 	public GameState(GameStateManager gsm) {

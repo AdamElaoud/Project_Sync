@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+
+import gamestates.GameState;
 import manager.GameStateManager;
 import manager.MouseManager;
 
@@ -23,6 +25,7 @@ public class Game extends Canvas implements Runnable {
 	private boolean running;
 	private final int FPS = 30;
 	private final int TARGET_TIME = 1000 / FPS;
+	private GameState currentState;
 	
 	// render
 	BufferStrategy bs;
@@ -63,7 +66,10 @@ public class Game extends Canvas implements Runnable {
 			start = System.nanoTime();
 			
 			// setup input
-			addMouseListener(gsm.getCurrentState());
+			if (currentState == null || currentState != gsm.getCurrentState()) {
+				addMouseListener(gsm.getCurrentState());
+				addMouseMotionListener(gsm.getCurrentState());
+			}
 
 			// process
 			tick();
