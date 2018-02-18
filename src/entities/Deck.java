@@ -1,9 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Deck {
+public class Deck implements Serializable {
 
+	private static final long serialVersionUID = -2789526004895896331L;
+	
 	private Random r;
 	private Card[] cards;
 	

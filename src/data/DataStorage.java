@@ -6,9 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-import entities.Card;
-import entities.Deck;
-
 public class DataStorage implements Serializable {
 
 	private static final long serialVersionUID = 1752536480676738644L;
@@ -24,11 +21,11 @@ public class DataStorage implements Serializable {
 	public DataStorage() {
 		try {
 			// Saving
-			saveFile = new FileOutputStream("data\\saveFile.sav");
+			saveFile = new FileOutputStream("src\\data\\saveFile.sav");
 			save = new ObjectOutputStream(saveFile);
 			
 			// Loading
-			loadFile = new FileInputStream("data\\saveFile.sav");
+			loadFile = new FileInputStream("src\\data\\saveFile.sav");
 			load = new ObjectInputStream(loadFile);
 			
 		} catch (Exception e) {
@@ -48,18 +45,7 @@ public class DataStorage implements Serializable {
 		try {
 			Object obj = load.readObject();
 			
-			// Deck cast
-			if (obj instanceof Deck) {
-				return (Deck) obj;
-				
-			// Card cast
-			} else if (obj instanceof Card) {
-				return (Card) obj;
-				
-			// Default
-			} else {
-				return obj;
-			}
+			return obj;
 			
 		} catch (Exception e) {
 			return null;
