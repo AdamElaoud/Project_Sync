@@ -113,9 +113,9 @@ public class Game extends Canvas implements Runnable {
 		
 		g = (Graphics2D) bs.getDrawGraphics();
 		
-		//set screen as black
+		// set screen as black
 		g.setColor(Color.black);
-		//x and y coordinates are for displacement where top left corner is the origin
+		// x and y coordinates are for displacement where top left corner is the origin
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);		
 		
 		gsm.render(g);

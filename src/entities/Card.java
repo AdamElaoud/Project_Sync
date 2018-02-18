@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 
 public interface Card {
 	
-	public abstract void render(Graphics2D g);
-	public abstract void mechanics();
+	public int numCopies();
+	public void render(Graphics2D g);
+	public void mechanics();
 }

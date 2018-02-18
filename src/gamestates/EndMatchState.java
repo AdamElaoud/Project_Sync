@@ -4,11 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 import manager.GameStateManager;
+import manager.MouseManager;
 
 public class EndMatchState extends GameState {
 
-	public EndMatchState(GameStateManager gsm) {
-		super(gsm);
+	public EndMatchState(GameStateManager gsm, MouseManager mm) {
+		super(gsm, mm);
 	}
 
 	public void init() {

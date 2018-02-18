@@ -1,30 +1,37 @@
 package gamestates;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import main.Game;
 import manager.GameStateManager;
 import manager.MouseManager;
 
-public class StartupState extends GameState {
+public class SelectDeckState extends GameState {
+	
+	private static int NUM_DECKS = 0;
+	private static int decks[];
 
-	public StartupState(GameStateManager gsm, MouseManager mm) {
+	public SelectDeckState(GameStateManager gsm, MouseManager mm) {
 		super(gsm, mm);
+		
 	}
-
+	
 	public void init() {
-		// Will load logo in this method
+		// load decks from save data
 	}
 
 	public void tick() {
-		// Will fade in logo in this method
-		gsm.setState(GameStateManager.MENU);
+		
 	}
 
 	public void render(Graphics2D g) {
-		// Will display logo in this method
+		// reset background
+		g.setColor(Color.white);
+		g.fillRect(0, 0, Game.WIDTH * Game.SCALE, Game.HEIGHT * Game.SCALE);
 	}
-	
+
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {
 		

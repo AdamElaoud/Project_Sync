@@ -4,11 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 import manager.GameStateManager;
+import manager.MouseManager;
 
-public class SelectState extends GameState {
+public class SelectCardState extends GameState {
 
-	public SelectState(GameStateManager gsm) {
-		super(gsm);
+	public SelectCardState(GameStateManager gsm, MouseManager mm) {
+		super(gsm, mm);
 	}
 
 	public void init() {

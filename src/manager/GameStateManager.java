@@ -18,18 +18,19 @@ public class GameStateManager {
 	private int currentState;
 	private int previousState;
 	
-	public static final int NUM_STATES = 6;
+	public static final int NUM_STATES = 7;
 	public static final int STARTUP = 0;
 	public static final int MENU = 1;
-	public static final int SELECT = 2;
+	public static final int SELECTCARD = 2;
 	public static final int PLAYTURN = 3;
 	public static final int ENDMATCH = 4;
 	public static final int STARTMATCH = 5;
+	public static final int SELECTDECK = 6;
 	
 	// initialize the GSM
 	public GameStateManager() {
 		paused = false;
-		pauseState = new PauseState(this);
+		pauseState = new PauseState(this, mm);
 		
 		mm = new MouseManager();
 		
@@ -47,27 +48,31 @@ public class GameStateManager {
 		
 		switch(state) {
 			case STARTUP: 
-				gameStates[state] = new StartupState(this);
+				gameStates[state] = new StartupState(this, mm);
 				gameStates[state].init();
 				break;
 			case MENU: 
 				gameStates[state] = new MenuState(this, mm);
 				gameStates[state].init();
 				break;
-			case SELECT:
-				gameStates[state] = new SelectState(this);
+			case SELECTCARD:
+				gameStates[state] = new SelectCardState(this, mm);
 				gameStates[state].init();
 				break;
 			case PLAYTURN:
-				gameStates[state] = new PlayTurnState(this);
+				gameStates[state] = new PlayTurnState(this, mm);
 				gameStates[state].init();
 				break;
 			case ENDMATCH:
-				gameStates[state] = new EndMatchState(this);
+				gameStates[state] = new EndMatchState(this, mm);
 				gameStates[state].init();
 				break;
 			case STARTMATCH:
-				gameStates[state] = new StartMatchState(this);
+				gameStates[state] = new StartMatchState(this, mm);
+				gameStates[state].init();
+				break;
+			case SELECTDECK:
+				gameStates[state] = new SelectDeckState(this, mm);
 				gameStates[state].init();
 				break;
 		}

@@ -6,11 +6,12 @@ import java.awt.event.MouseEvent;
 
 import main.Game;
 import manager.GameStateManager;
+import manager.MouseManager;
 
 public class StartMatchState extends GameState {
 
-	public StartMatchState(GameStateManager gsm) {
-		super(gsm);
+	public StartMatchState(GameStateManager gsm, MouseManager mm) {
+		super(gsm, mm);
 	}
 	
 	public void init() {
