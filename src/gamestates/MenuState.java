@@ -40,32 +40,30 @@ public class MenuState extends GameState {
 		// MENU
 		g.drawString("MENU", (WIDTH * SCALE / 2) - 336 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
 
-		// PLAY
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
-			g.setColor(Color.orange);
-			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
+		for (int i = 2; i <= 4; i++) {
+			// Highlight	
+			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192)) {
+				g.setColor(Color.orange);
+				g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192);
+			}
+			
+			// Label
+			g.setColor(Color.white);
+			switch (i) {
+				case 2: 
+					g.drawString(options[0], (WIDTH * SCALE / 2) - 266 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * i / 5) + 42);
+					g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192);
+					break;
+				case 3:
+					g.drawString(options[1], (WIDTH * SCALE / 2) - 318 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * i / 5) + 42);
+					g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192);
+					break;
+				case 4:
+					g.drawString(options[2], (WIDTH * SCALE / 2) - 270 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * i / 5) + 42);
+					g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192);
+					break;
+			}
 		}
-		g.setColor(Color.white);
-		g.drawString(options[0], (WIDTH * SCALE / 2) - 266 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * 2 / 5) + 42);
-		g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192);
-		
-		// Decks
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 3 / 5) - 96, 512, 192)) {
-			g.setColor(Color.pink);
-			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 3 / 5) - 96, 512, 192);
-		}
-		g.setColor(Color.white);
-		g.drawString(options[1], (WIDTH * SCALE / 2) - 318 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * 3 / 5) + 42);
-		g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 3 / 5) - 96, 512, 192);
-
-		// Quit
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 4 / 5) - 96, 512, 192)) {
-			g.setColor(Color.magenta);
-			g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 4 / 5) - 96, 512, 192);
-		}
-		g.setColor(Color.white);
-		g.drawString(options[2], (WIDTH * SCALE / 2) - 270 + (WIDTH * SCALE / 16), (HEIGHT * SCALE * 4 / 5) + 42);
-		g.drawRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 4 / 5) - 96, 512, 192);
 		
 	}
 
@@ -90,15 +88,24 @@ public class MenuState extends GameState {
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
 		
-		// Swap Deck Select State (Press Play)
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 2 / 5) - 96, 512, 192)) {
-			gsm.setState(GameStateManager.SELECTDECK);
+		for (int i = 2; i <= 4; i++) {
+			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192)) {
+				switch(i) {
+					case 2: 
+						// (Press Play) Swap Deck Select State
+						gsm.setState(GameStateManager.SELECTDECK);
+						break;
+					case 3: 
+						// (Press Deck) Swap Deck Build State
+						break;
+					case 4:
+						// (Press Quit) Exit Game 
+						System.exit(0);
+						break;
+				}
+			}
 		}
 		
-		// Exit Game (Press Quit)
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * 4 / 5) - 96, 512, 192)) {
-			System.exit(0);
-		}
 	}
 
 	// mouse enters component
