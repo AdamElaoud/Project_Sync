@@ -47,6 +47,7 @@ public class SelectDeckState extends GameState {
 	}
 
 	public void render(Graphics2D g) {
+		System.out.println("X: " + mm.getMX() + " Y: " + mm.getmY());
 		// reset background
 		g.setColor(Color.darkGray);
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
@@ -101,30 +102,51 @@ public class SelectDeckState extends GameState {
 
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 		
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
+
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
+
 	}
 
 	public void mousePressed(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 		
 	}
 
 	public void mouseReleased(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 		
 	}
 
 	public void mouseDragged(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 		
 	}
 
 	public void mouseMoved(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 		
 	}
 

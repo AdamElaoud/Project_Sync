@@ -68,21 +68,6 @@ public class MenuState extends GameState {
 	}
 
 	// Mouse Events	
-	public void mouseDragged(MouseEvent e) {
-		// update location
-		mm.setMX(e.getX());
-		mm.setMY(e.getY());
-				
-	}
-
-	// mouse moved onto component but not clicked
-	public void mouseMoved(MouseEvent e) {
-		// update location
-		mm.setMX(e.getX());
-		mm.setMY(e.getY());
-				
-	}
-
 	public void mouseClicked(MouseEvent e) {
 		// update location
 		mm.setMX(e.getX());
@@ -97,6 +82,7 @@ public class MenuState extends GameState {
 						break;
 					case 3: 
 						// (Press Deck) Swap Deck Build State
+						gsm.setState(GameStateManager.BUILDDECK);
 						break;
 					case 4:
 						// (Press Quit) Exit Game 
@@ -116,7 +102,6 @@ public class MenuState extends GameState {
 				
 	}
 
-	@Override
 	public void mouseExited(MouseEvent e) {
 		// update location
 		mm.setMX(e.getX());
@@ -124,7 +109,6 @@ public class MenuState extends GameState {
 				
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		// update location
 		mm.setMX(e.getX());
@@ -132,12 +116,26 @@ public class MenuState extends GameState {
 				
 	}
 
-	@Override
 	public void mouseReleased(MouseEvent e) {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
 				
+	}
+	
+	public void mouseDragged(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
+				
+	}
+
+	// mouse moved onto component but not clicked
+	public void mouseMoved(MouseEvent e) {
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
+		
 	}
 
 }

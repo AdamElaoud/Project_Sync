@@ -66,9 +66,19 @@ public class Game extends Canvas implements Runnable {
 			start = System.nanoTime();
 			
 			// setup input
-			if (currentState == null || currentState != gsm.getCurrentState()) {
-				addMouseListener(gsm.getCurrentState());
-				addMouseMotionListener(gsm.getCurrentState());
+			if (currentState == null) {
+				currentState = gsm.getCurrentState();
+				addMouseListener(currentState);
+				addMouseMotionListener(currentState);
+			} else if (currentState != gsm.getCurrentState()) {
+				// remove
+				removeMouseListener(currentState);
+				removeMouseMotionListener(currentState);
+				
+				// update
+				currentState = gsm.getCurrentState();
+				addMouseListener(currentState);
+				addMouseMotionListener(currentState);
 			}
 
 			// process
