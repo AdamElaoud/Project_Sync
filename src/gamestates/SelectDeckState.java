@@ -47,7 +47,6 @@ public class SelectDeckState extends GameState {
 	}
 
 	public void render(Graphics2D g) {
-		System.out.println("X: " + mm.getMX() + " Y: " + mm.getmY());
 		// reset background
 		g.setColor(Color.darkGray);
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
@@ -58,6 +57,17 @@ public class SelectDeckState extends GameState {
 		
 		// MENU
 		g.drawString("Select Deck", (WIDTH * SCALE / 2) - 488 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
+		
+		// BACK
+		g.setFont(new Font("Arial", Font.PLAIN, 72));
+		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			g.setColor(Color.cyan);
+			g.fillRect(48, 48, 256, 128);
+		}
+		g.setColor(Color.white);
+		g.drawString("Back", 96, 136);
+		g.drawRect(48, 48, 256, 128);
+
 		
 		// reset font for decks
 		g.setFont(new Font("Arial", Font.PLAIN, 48));
@@ -105,6 +115,11 @@ public class SelectDeckState extends GameState {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
+		
+		// Back
+		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			gsm.setState(GameStateManager.MENU);
+		}
 		
 	}
 
