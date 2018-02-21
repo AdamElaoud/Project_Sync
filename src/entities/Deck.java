@@ -9,6 +9,9 @@ public class Deck implements Serializable {
 	
 	private Random r;
 	private Card[] cards;
+	private Element primary;
+	private Element secondary;
+	private Element tertiary;
 	
 	public Deck() {
 		cards = new Card[30];

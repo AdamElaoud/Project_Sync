@@ -14,7 +14,10 @@ public class BuildDeckState extends GameState {
 	
 	private static int NUM_DECKS = 0;
 	private static int MAX_DECKS = 8;
+	
+	// Decks
 	private static Deck decks[];
+	CreateDeckState create;
 	
 	// Load and Save
 	DataStorage storage;
@@ -125,12 +128,44 @@ public class BuildDeckState extends GameState {
 		for (int i = 1; i <= MAX_DECKS; i++) {
 			// Decks #1 - #4
 			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384)) {
+				gsm.setState(GameStateManager.CREATEDECK);
+				create = (CreateDeckState) gsm.getCurrentState();
 				
+				switch (i) {
+					case 1:
+						create.setDeck(decks[0]);
+						break;
+					case 2:
+						create.setDeck(decks[1]);
+						break;
+					case 3:
+						create.setDeck(decks[2]);
+						break;
+					case 4:
+						create.setDeck(decks[3]);
+						break;
+				}
 			}
 			
 			// Decks #5 - #8
 			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384)) {
+				gsm.setState(GameStateManager.CREATEDECK);
+				create = (CreateDeckState) gsm.getCurrentState();
 				
+				switch (i) {
+				case 5:
+					create.setDeck(decks[4]);
+					break;
+				case 6:
+					create.setDeck(decks[5]);
+					break;
+				case 7:
+					create.setDeck(decks[6]);
+					break;
+				case 8:
+					create.setDeck(decks[7]);
+					break;
+			}
 			}
 		}
 	}
