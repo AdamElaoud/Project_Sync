@@ -18,7 +18,7 @@ public class GameStateManager {
 	private int currentState;
 	private int previousState;
 	
-	public static final int NUM_STATES = 7;
+	public static final int NUM_STATES = 9;
 	public static final int STARTUP = 0;
 	public static final int MENU = 1;
 	public static final int SELECTCARD = 2;
@@ -27,6 +27,7 @@ public class GameStateManager {
 	public static final int STARTMATCH = 5;
 	public static final int SELECTDECK = 6;
 	public static final int BUILDDECK = 7;
+	public static final int CREATEDECK = 8;
 	
 	// initialize the GSM
 	public GameStateManager() {
@@ -78,6 +79,10 @@ public class GameStateManager {
 				break;
 			case BUILDDECK:
 				gameStates[state] = new BuildDeckState(this, mm);
+				gameStates[state].init();
+				break;
+			case CREATEDECK:
+				gameStates[state] = new CreateDeckState(this, mm);
 				gameStates[state].init();
 				break;
 		}
