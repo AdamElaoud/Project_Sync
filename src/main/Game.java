@@ -62,7 +62,6 @@ public class Game extends Canvas implements Runnable {
 		
 		// game loop
 		while(running) {
-			
 			start = System.nanoTime();
 			
 			// setup input

@@ -21,12 +21,13 @@ public class MouseManager {
 		for (int i = 0; i < NUM_BUTTONS; i++) {
 			prevMouseState[i] = mouseState[i];
 		}
+		
 	}
 	
 	// sets value of buttons in mouseState
 	public void mouseSet(int button, boolean set) {
 		if (button == MouseEvent.BUTTON1) mouseState[LMB] = set;
-		else if (button == MouseEvent.BUTTON2) mouseState[RMB] = set;
+		else if (button == MouseEvent.BUTTON3) mouseState[RMB] = set;
 	}
 	
 	// currently up but was down

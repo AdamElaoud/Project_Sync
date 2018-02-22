@@ -22,4 +22,8 @@ public class Deck implements Serializable {
 		int random = r.nextInt(cards.length);
 		return cards[random];
 	}
+	
+	public Card[] getCards() {
+		return cards;
+	}
 }

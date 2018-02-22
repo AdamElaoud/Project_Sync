@@ -113,6 +113,7 @@ public class MenuState extends GameState {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
+		mm.mouseSet(e.getButton(), true);
 				
 	}
 
@@ -120,7 +121,8 @@ public class MenuState extends GameState {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
-				
+		mm.mouseSet(e.getButton(), false);
+		
 	}
 	
 	public void mouseDragged(MouseEvent e) {
@@ -135,7 +137,7 @@ public class MenuState extends GameState {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
-		
+				
 	}
 
 }

@@ -59,7 +59,7 @@ public class BuildDeckState extends GameState {
 		g.setFont(new Font("Arial", Font.PLAIN, 140));
 		
 		// MENU
-		g.drawString("Build A Deck", (WIDTH * SCALE / 2) - 488 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
+		g.drawString("Build A Deck", (WIDTH * SCALE / 2) - 536 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
 		
 		// BACK
 		g.setFont(new Font("Arial", Font.PLAIN, 72));
@@ -70,7 +70,6 @@ public class BuildDeckState extends GameState {
 		g.setColor(Color.white);
 		g.drawString("Back", 96, 136);
 		g.drawRect(48, 48, 256, 128);
-
 		
 		// reset font for decks
 		g.setFont(new Font("Arial", Font.PLAIN, 48));
@@ -188,14 +187,16 @@ public class BuildDeckState extends GameState {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
-
+		mm.mouseSet(e.getButton(), true);
+		
 	}
 
 	public void mouseReleased(MouseEvent e) {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
-
+		mm.mouseSet(e.getButton(), false);
+		
 	}
 
 	public void mouseDragged(MouseEvent e) {
