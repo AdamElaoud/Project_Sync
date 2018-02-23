@@ -31,6 +31,7 @@ public class BuildDeckState extends GameState {
 	}
 
 	public void init() {
+		storage.initDeckSave();
 		Object obj = storage.loadObjects();
 		
 		while (obj != null && NUM_DECKS < MAX_DECKS) {

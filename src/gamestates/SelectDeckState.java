@@ -27,7 +27,8 @@ public class SelectDeckState extends GameState {
 		storage = new DataStorage();
 	}
 	
-	public void init() {		
+	public void init() {
+		storage.initDeckSave();
 		Object obj = storage.loadObjects();
 		
 		while (obj != null && NUM_DECKS < MAX_DECKS) {
@@ -39,6 +40,9 @@ public class SelectDeckState extends GameState {
 			
 			obj = storage.loadObjects();			
 		}
+		
+		storage.closeLoad();
+		storage.closeSave();
 
 	}
 

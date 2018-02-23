@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import data.DataStorage;
 import entities.Card;
 import entities.Deck;
+import entities.Element;
 import manager.GameStateManager;
 import manager.MouseManager;
 
@@ -21,6 +22,20 @@ public class CreateDeckState extends GameState {
 	
 	// Load and Save
 	DataStorage storage;
+	
+	// Elements
+	private static final int PRIMARY = 1;
+	private static final int SECONDARY = 2;
+	private static final int TERTIARY = 3;
+	Element primary;
+	Element secondary;
+	Element tertiary;
+	
+	// Element List
+	private static Element[] elements = {
+			Element.Time, Element.Fire, Element.Life, Element.Thunder, 
+			Element.Earth, Element.Shadow, Element.Water, Element.Air};
+	int count;
 
 	public CreateDeckState(GameStateManager gsm, MouseManager mm) {
 		super(gsm, mm);
@@ -29,19 +44,27 @@ public class CreateDeckState extends GameState {
 	}
 
 	public void init() {
-		
+		storage.initDeckSave();
 	}
 	
 	public void setDeck(Deck deck) {
-		this.deck = deck;
-		
 		if (deck != null) {
+			this.deck = deck;
 			cards = deck.getCards();
+			primary = deck.getElement(PRIMARY);
+			secondary = deck.getElement(SECONDARY);
+			tertiary = deck.getElement(TERTIARY);
+		} else  {
+			this.deck = new Deck();
 		}
+		
 	}
 
 	public void tick() {
+		if (deck != null)
+			System.out.println(deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
 		
+		//if (primary deck.getElement(PRIMARY))
 	}
 
 	public void render(Graphics2D g) {
@@ -68,7 +91,12 @@ public class CreateDeckState extends GameState {
 		
 		// NEXT
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)) {
-			g.setColor(Color.cyan);
+			if (deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null ) {
+				g.setColor(Color.cyan);
+			} else {
+				g.setColor(Color.lightGray);
+			}
+			
 			g.fillRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
 		}
 		g.setColor(Color.white);
@@ -82,20 +110,84 @@ public class CreateDeckState extends GameState {
 		// Tertiary
 		g.drawString("Tertiary: ", 256, (HEIGHT * SCALE * 4 / 5));
 		
+		// Permanent Selection
+		g.setColor(Color.lightGray);
+		count = 0;
+		for (Element ele: elements) {
+			if (deck.getElement(PRIMARY) == ele) {
+				g.fillRect(256 + (count * 196) - 10, (HEIGHT * SCALE * 2 / 5) + 40, 148, 80);
+			}
+			
+			if (deck.getElement(SECONDARY) == ele) {
+				g.fillRect(256 + (count * 196) - 10, (HEIGHT * SCALE * 3 / 5) + 40, 148, 80);
+			}
+			
+			if (deck.getElement(TERTIARY) == ele) {
+				g.fillRect(256 + (count * 196) - 10, (HEIGHT * SCALE * 4 / 5) + 40, 148, 80);
+			}
+			
+			count++;
+		}
+		
 		// Elements
 		for (int i = 2; i <= 4; i++) {
 			for (int j = 0; j < MAX_ELEMENTS; j++) {
-				// Time
-				// Fire
-				// Life
-				// Thunder
-				// Earth
-				// Shadow
-				// Water
-				// Air
+				// Highlight
+				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
+					g.setColor(Color.lightGray);
+					g.fillRect(256 + (j * 196) - 10, (HEIGHT * SCALE * i / 5) + 40, 148, 80);
+				}		
+				
+				// Color Scheme
+				switch (j) {
+					// Time
+					case 0:
+						g.setColor(Color.orange);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Fire
+					case 1:
+						g.setColor(Color.red);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Life
+					case 2:
+						g.setColor(Color.green);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Thunder
+					case 3:
+						g.setColor(Color.yellow);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Earth
+					case 4:
+						g.setColor(new Color(102, 51, 0));
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Shadow
+					case 5:
+						g.setColor(Color.magenta);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Water
+					case 6:
+						g.setColor(Color.blue);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;
+					// Air
+					case 7:
+						g.setColor(Color.cyan);
+						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+						break;	
+				}
+								
+				g.setColor(Color.white);
 				g.drawRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
 			}
 		}
+		
+		
 		
 	}
 	
@@ -108,6 +200,40 @@ public class CreateDeckState extends GameState {
 		// Back
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			gsm.setState(GameStateManager.BUILDDECK);
+		}
+		
+		// Select Elements
+		for (int i = 2; i <= 4; i++) {
+			for (int j = 0; j < MAX_ELEMENTS; j++) {
+				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
+					switch (j) {
+					case 0: 
+						deck.setElement(i - 1, Element.Time);
+						break;
+					case 1: 
+						deck.setElement(i - 1, Element.Fire);
+						break;
+					case 2: 
+						deck.setElement(i - 1, Element.Life);
+						break;
+					case 3: 
+						deck.setElement(i - 1, Element.Thunder);
+						break;
+					case 4: 
+						deck.setElement(i - 1, Element.Earth);
+						break;
+					case 5: 
+						deck.setElement(i - 1, Element.Shadow);
+						break;
+					case 6: 
+						deck.setElement(i - 1, Element.Water);
+						break;
+					case 7: 
+						deck.setElement(i - 1, Element.Air);
+						break;
+					}
+				}
+			}
 		}
 		
 	}

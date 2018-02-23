@@ -5,20 +5,46 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import entities.Deck;
 
 public class DataStorage implements Serializable {
 
 	private static final long serialVersionUID = 1752536480676738644L;
 	
 	// Saving
-	FileOutputStream saveFile;
-	ObjectOutputStream save;
+	private FileOutputStream saveFile;
+	private ObjectOutputStream save;
 	
 	// Loading
-	FileInputStream loadFile;
-	ObjectInputStream load;
+	private FileInputStream loadFile;
+	private ObjectInputStream load;
+	
+	// Overwrite
+	private ArrayList<Deck> deckSave;
 
 	public DataStorage() {
+		deckSave = new ArrayList<Deck>();
+		
+	}
+	
+	public void initDeckSave() {
+		try {
+			// Saving
+			saveFile = new FileOutputStream("src\\data\\deckSaveFile.sav");
+			save = new ObjectOutputStream(saveFile);
+			
+			// Loading
+			loadFile = new FileInputStream("src\\data\\deckSaveFile.sav");
+			load = new ObjectInputStream(loadFile);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void initGeneralSave() {
 		try {
 			// Saving
 			saveFile = new FileOutputStream("src\\data\\saveFile.sav");
@@ -43,9 +69,7 @@ public class DataStorage implements Serializable {
 	
 	public Object loadObjects() {
 		try {
-			Object obj = load.readObject();
-			
-			return obj;
+			return load.readObject();
 			
 		} catch (Exception e) {
 			return null;
@@ -67,6 +91,35 @@ public class DataStorage implements Serializable {
 			load.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void overwriteDeck(Deck overwrite) {
+		Object obj = loadObjects();
+		Deck readIn;
+		
+		// load all current decks
+		try {
+			while (obj != null) {
+				readIn = (Deck) obj;
+				
+				if (overwrite.getName().equals(readIn.getName())) {
+					deckSave.add(overwrite);
+
+				} else {
+					deckSave.add(readIn);
+				}
+				
+				obj = loadObjects();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// Overwrite
+		for (Deck deck : deckSave) {
+			saveObject(deck);
 		}
 	}
 }
