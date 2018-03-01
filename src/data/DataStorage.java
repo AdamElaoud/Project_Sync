@@ -121,5 +121,8 @@ public class DataStorage implements Serializable {
 		for (Deck deck : deckSave) {
 			saveObject(deck);
 		}
+		
+		// clear deckSave
+		deckSave.clear();
 	}
 }

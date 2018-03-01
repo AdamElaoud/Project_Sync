@@ -17,19 +17,17 @@ public class CreateDeckState extends GameState {
 	private static final int MAX_ELEMENTS = 8;
 	
 	// Deck
-	Deck deck;
-	Card[] cards;
+	private Deck deck;
+	private Card[] cards;
+	private FillDeckState fill;
 	
 	// Load and Save
-	DataStorage storage;
+	private DataStorage storage;
 	
 	// Elements
 	private static final int PRIMARY = 1;
 	private static final int SECONDARY = 2;
 	private static final int TERTIARY = 3;
-	Element primary;
-	Element secondary;
-	Element tertiary;
 	
 	// Element List
 	private static Element[] elements = {
@@ -39,11 +37,10 @@ public class CreateDeckState extends GameState {
 
 	public CreateDeckState(GameStateManager gsm, MouseManager mm) {
 		super(gsm, mm);
-		
-		storage = new DataStorage();
 	}
 
 	public void init() {
+		storage = new DataStorage();
 		storage.initDeckSave();
 	}
 	
@@ -51,9 +48,6 @@ public class CreateDeckState extends GameState {
 		if (deck != null) {
 			this.deck = deck;
 			cards = deck.getCards();
-			primary = deck.getElement(PRIMARY);
-			secondary = deck.getElement(SECONDARY);
-			tertiary = deck.getElement(TERTIARY);
 		} else  {
 			this.deck = new Deck();
 		}
@@ -61,9 +55,6 @@ public class CreateDeckState extends GameState {
 	}
 
 	public void tick() {
-		if (deck != null)
-			System.out.println(deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
-		
 		//if (primary deck.getElement(PRIMARY))
 	}
 
@@ -104,11 +95,13 @@ public class CreateDeckState extends GameState {
 		g.drawRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
 		
 		// Primary
-		g.drawString("Primary: ", 256, (HEIGHT * SCALE * 2 / 5));
+		g.drawString("Primary:", 256, (HEIGHT * SCALE * 2 / 5));
 		// Secondary
-		g.drawString("Secondary: ", 256, (HEIGHT * SCALE * 3 / 5));
+		g.drawString("Secondary:", 256, (HEIGHT * SCALE * 3 / 5));
 		// Tertiary
-		g.drawString("Tertiary: ", 256, (HEIGHT * SCALE * 4 / 5));
+		g.drawString("Tertiary:", 256, (HEIGHT * SCALE * 4 / 5));
+		// Name
+		g.drawString("Name: " + deck.getName(), (WIDTH * SCALE) - 512, 128);
 		
 		// Permanent Selection
 		g.setColor(Color.lightGray);
@@ -196,10 +189,18 @@ public class CreateDeckState extends GameState {
 		// update location
 		mm.setMX(e.getX());
 		mm.setMY(e.getY());
-		
+				
 		// Back
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			gsm.setState(GameStateManager.BUILDDECK);
+		}
+		
+		// Next
+		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)
+				&& deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null) {
+			gsm.setState(GameStateManager.FILLDECK);
+			fill = (FillDeckState) gsm.getCurrentState();
+			fill.setDeck(deck);
 		}
 		
 		// Select Elements
@@ -232,10 +233,15 @@ public class CreateDeckState extends GameState {
 						deck.setElement(i - 1, Element.Air);
 						break;
 					}
+					
+					// Print out Element Selection
+					if (deck != null)
+						System.out.println(deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
+
+					
 				}
 			}
 		}
-		
 	}
 
 	public void mouseEntered(MouseEvent e) {

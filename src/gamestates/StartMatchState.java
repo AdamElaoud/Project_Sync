@@ -30,31 +30,47 @@ public class StartMatchState extends GameState {
 
 	// Mouse Events
 	public void mouseClicked(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
+		mm.mouseSet(e.getButton(), true);
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
+		mm.mouseSet(e.getButton(), false);
 	}
 
 	public void mouseDragged(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 	}
 
 	public void mouseMoved(MouseEvent e) {
-		
+		// update location
+		mm.setMX(e.getX());
+		mm.setMY(e.getY());
 	}
 
 }

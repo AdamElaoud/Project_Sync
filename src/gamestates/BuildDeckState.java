@@ -17,10 +17,10 @@ public class BuildDeckState extends GameState {
 	
 	// Decks
 	private static Deck decks[];
-	CreateDeckState create;
+	private CreateDeckState create;
 	
 	// Load and Save
-	DataStorage storage;
+	private DataStorage storage;
 
 	public BuildDeckState(GameStateManager gsm, MouseManager mm) {
 		super(gsm, mm);
@@ -43,6 +43,8 @@ public class BuildDeckState extends GameState {
 			
 			obj = storage.loadObjects();			
 		}
+		
+		System.out.println("Num Decks: " + NUM_DECKS);
 		
 	}
 
@@ -87,7 +89,7 @@ public class BuildDeckState extends GameState {
 				// Label
 				g.setColor(Color.white);
 				g.drawRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384);
-				if (decks[0] != null) {
+				if (decks[i - 1] != null) {
 					g.drawString("Complete", (WIDTH * SCALE / 6 * i) + 72, (HEIGHT * SCALE / 2) - 42);
 				} else {
 					g.drawString("Not Built", (WIDTH * SCALE / 6 * i) + 80, (HEIGHT * SCALE / 2) - 42);
@@ -104,7 +106,7 @@ public class BuildDeckState extends GameState {
 				// Label
 				g.setColor(Color.white);
 				g.drawRect((WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384);
-				if (decks[0] != null) {
+				if (decks[i - 1] != null) {
 					g.drawString("Complete", (WIDTH * SCALE / 6 * (i - 4)) + 72, (HEIGHT * SCALE / 5 * 4));
 				} else {
 					g.drawString("Not Built", (WIDTH * SCALE / 6 * (i - 4)) + 80, (HEIGHT * SCALE / 5 * 4));
