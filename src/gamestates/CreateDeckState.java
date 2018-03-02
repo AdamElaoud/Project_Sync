@@ -25,9 +25,11 @@ public class CreateDeckState extends GameState {
 	private DataStorage storage;
 	
 	// Elements
-	private static final int PRIMARY = 1;
-	private static final int SECONDARY = 2;
-	private static final int TERTIARY = 3;
+	private static final int PRIMARY = 0;
+	private static final int SECONDARY = 1;
+	private static final int TERTIARY = 2;
+	private Element[] record;
+	private Element[] prevRecord;
 	
 	// Element List
 	private static Element[] elements = {
@@ -42,6 +44,8 @@ public class CreateDeckState extends GameState {
 	public void init() {
 		storage = new DataStorage();
 		storage.initDeckSave();
+		record = new Element[3];
+		prevRecord = new Element[3];
 	}
 	
 	public void setDeck(Deck deck) {
@@ -50,13 +54,26 @@ public class CreateDeckState extends GameState {
 			cards = deck.getCards();
 		} else  {
 			this.deck = new Deck();
+			this.deck.setName("First");
 		}
 		
 	}
 
 	public void tick() {
-		if (!storage.overwriteDeck(deck))
-			storage.saveObject(deck);
+		// update records of elements
+		for (int i = 0; i < 3; i++) {
+			prevRecord[i] = record[i];
+		}
+		
+		for (int i = 0; i < 3; i++) {
+			if (prevRecord[i] != record[i]) {
+				System.out.println("Element Changed!");
+				// if element is changed, initiate save
+				if (!storage.overwriteDeck(deck))
+					storage.saveObject(deck);
+			}
+				
+		}
 	}
 
 	public void render(Graphics2D g) {
@@ -210,35 +227,44 @@ public class CreateDeckState extends GameState {
 				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
 					switch (j) {
 					case 0: 
-						deck.setElement(i - 1, Element.Time);
+						deck.setElement(i - 2, Element.Time);
+						record[i - 2] = Element.Time;
 						break;
 					case 1: 
-						deck.setElement(i - 1, Element.Fire);
+						deck.setElement(i - 2, Element.Fire);
+						record[i - 2] = Element.Fire;
 						break;
 					case 2: 
-						deck.setElement(i - 1, Element.Life);
+						deck.setElement(i - 2, Element.Life);
+						record[i - 2] = Element.Life;
 						break;
 					case 3: 
-						deck.setElement(i - 1, Element.Thunder);
+						deck.setElement(i - 2, Element.Thunder);
+						record[i - 2] = Element.Thunder;
 						break;
 					case 4: 
-						deck.setElement(i - 1, Element.Earth);
+						deck.setElement(i - 2, Element.Earth);
+						record[i - 2] = Element.Earth;
 						break;
 					case 5: 
-						deck.setElement(i - 1, Element.Shadow);
+						deck.setElement(i - 2, Element.Shadow);
+						record[i - 2] = Element.Shadow;
 						break;
 					case 6: 
-						deck.setElement(i - 1, Element.Water);
+						deck.setElement(i - 2, Element.Water);
+						record[i - 2] = Element.Water;
 						break;
 					case 7: 
-						deck.setElement(i - 1, Element.Air);
+						deck.setElement(i - 2, Element.Air);
+						record[i - 2] = Element.Air;
 						break;
 					}
 					
 					// Print out Element Selection
-					if (deck != null)
-						System.out.println(deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
-
+					if (deck != null) {
+						System.out.println("Current: " + record[0] + " " + record[1] + " " + record[2]);
+						System.out.println("Previous: " + prevRecord[0] + " " + prevRecord[1] + " " + prevRecord[2]);
+					}
 					
 				}
 			}

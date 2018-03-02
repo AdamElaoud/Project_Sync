@@ -16,9 +16,9 @@ public class Deck implements Serializable {
 	private Element secondary;
 	private Element tertiary;
 	
-	private static final int PRIMARY = 1;
-	private static final int SECONDARY = 2;
-	private static final int TERTIARY = 3;
+	private static final int PRIMARY = 0;
+	private static final int SECONDARY = 1;
+	private static final int TERTIARY = 2;
 	
 	public Deck() {
 		cards = new Card[30];

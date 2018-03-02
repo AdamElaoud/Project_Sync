@@ -51,8 +51,8 @@ public class FillDeckState extends GameState {
 	}
 
 	public void tick() {
-		if (!storage.overwriteDeck(deck))
-			storage.saveObject(deck);
+//		if (!storage.overwriteDeck(deck))
+//			storage.saveObject(deck);
 	}
 
 	public void render(Graphics2D g) {
