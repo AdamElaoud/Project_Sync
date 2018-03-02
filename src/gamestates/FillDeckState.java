@@ -51,7 +51,8 @@ public class FillDeckState extends GameState {
 	}
 
 	public void tick() {
-		
+		if (!storage.overwriteDeck(deck))
+			storage.saveObject(deck);
 	}
 
 	public void render(Graphics2D g) {
@@ -62,10 +63,7 @@ public class FillDeckState extends GameState {
 				// setting font
 				g.setColor(Color.white);
 				g.setFont(new Font("Arial", Font.PLAIN, 140));
-				
-				// MENU
-				g.drawString("Deck Builder", (WIDTH * SCALE / 2) - 512 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
-				
+								
 				// BACK
 				g.setFont(new Font("Arial", Font.PLAIN, 72));
 				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
@@ -89,6 +87,9 @@ public class FillDeckState extends GameState {
 				g.setColor(Color.white);
 				g.drawString("Next", (WIDTH * SCALE) - 256, (HEIGHT * SCALE) - 90);
 				g.drawRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
+				
+				// Name
+				g.drawString("Name: " + deck.getName(), (WIDTH * SCALE) - 512, 128);
 	}
 	
 	// Mouse Events

@@ -94,17 +94,29 @@ public class DataStorage implements Serializable {
 		}
 	}
 	
-	public void overwriteDeck(Deck overwrite) {
+	public boolean overwriteDeck(Deck overwrite) {
+		boolean overwritten = false;
 		Object obj = loadObjects();
 		Deck readIn;
+		String overwriteName = overwrite.getName();
+		String readInName;
+		
+		System.out.println("Overwrite deck name: " + overwriteName);
 		
 		// load all current decks
 		try {
+			
+			System.out.println("Overwrite: " + obj);
 			while (obj != null) {
 				readIn = (Deck) obj;
+				readInName = readIn.getName();
 				
-				if (overwrite.getName().equals(readIn.getName())) {
+				System.out.println("Read in deck name: " + readInName);
+				
+				if (compare(overwriteName, readInName)) {
+					System.out.println("Overwrite deck found!");
 					deckSave.add(overwrite);
+					overwritten = true;
 
 				} else {
 					deckSave.add(readIn);
@@ -124,5 +136,14 @@ public class DataStorage implements Serializable {
 		
 		// clear deckSave
 		deckSave.clear();
+		
+		if (!overwritten)
+			System.out.println("Did not find overwrite deck!");
+		
+		return overwritten;
+	}
+	
+	private static boolean compare(String str1, String str2) {
+		return (str1 == null) ? str2 == null : str1.equals(str2);
 	}
 }

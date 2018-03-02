@@ -55,7 +55,8 @@ public class CreateDeckState extends GameState {
 	}
 
 	public void tick() {
-		//if (primary deck.getElement(PRIMARY))
+		if (!storage.overwriteDeck(deck))
+			storage.saveObject(deck);
 	}
 
 	public void render(Graphics2D g) {
