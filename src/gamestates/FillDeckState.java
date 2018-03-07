@@ -16,18 +16,15 @@ public class FillDeckState extends GameState {
 	
 	// Card list
 	private ArrayList<Card> allCards;
-	
-	// Load and Save
-	private DataStorage storage;
-	
+		
 	// Deck setup
 	private boolean full;
 	private Deck deck;
 	private Card[] cards;
 	private CreateDeckState create;
 	
-	public FillDeckState(GameStateManager gsm, MouseManager mm) {
-		super(gsm, mm);
+	public FillDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
+		super(gsm, mm, storage);
 	}
 
 	public void init() {
@@ -100,6 +97,7 @@ public class FillDeckState extends GameState {
 		
 		// Back
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			storage.closeSave();
 			gsm.setState(GameStateManager.CREATEDECK);
 			create = (CreateDeckState) gsm.getCurrentState();
 			create.setDeck(deck);

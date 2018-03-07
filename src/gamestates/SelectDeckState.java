@@ -19,8 +19,8 @@ public class SelectDeckState extends GameState {
 	// Load and Save
 	DataStorage storage;
 
-	public SelectDeckState(GameStateManager gsm, MouseManager mm) {
-		super(gsm, mm);
+	public SelectDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
+		super(gsm, mm, storage);
 		
 		decks = new Deck[MAX_DECKS];
 		

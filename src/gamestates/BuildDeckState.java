@@ -13,25 +13,21 @@ import manager.MouseManager;
 public class BuildDeckState extends GameState {
 	
 	private static int NUM_DECKS = 0;
-	private static int MAX_DECKS = 8;
+	private static int MAX_DECKS = 4;
 	
 	// Decks
 	private static Deck decks[];
 	private CreateDeckState create;
 	
-	// Load and Save
-	private DataStorage storage;
-
-	public BuildDeckState(GameStateManager gsm, MouseManager mm) {
-		super(gsm, mm);
+	public BuildDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
+		super(gsm, mm, storage);
 		
 		decks = new Deck[MAX_DECKS];
 		
-		storage = new DataStorage();
 	}
 
 	public void init() {
-		storage.initDeckSave();
+//		storage.initDeckSave();
 		Object obj = storage.loadObjects();
 		
 		System.out.println("Loading: " + obj);
@@ -79,42 +75,42 @@ public class BuildDeckState extends GameState {
 		// reset font for decks
 		g.setFont(new Font("Arial", Font.PLAIN, 48));
 		
-		for (int i = 1; i <= MAX_DECKS; i++) {
-			// Decks #1 - #4
-			if (i <= 4) {
-				// Highlight
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384)) {
-					g.setColor(Color.blue);
-					g.fillRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384);
-				}
-				
-				// Label
-				g.setColor(Color.white);
-				g.drawRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384);
-				if (decks[i - 1] != null) {
-					g.drawString("Complete", (WIDTH * SCALE / 6 * i) + 72, (HEIGHT * SCALE / 2) - 42);
-				} else {
-					g.drawString("Not Built", (WIDTH * SCALE / 6 * i) + 80, (HEIGHT * SCALE / 2) - 42);
-				}
-				
-			// Decks #5 - #8
-			} else {
-				// Highlight
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384)) {
-					g.setColor(Color.orange);
-					g.fillRect((WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384);
-				}
-				
-				// Label
-				g.setColor(Color.white);
-				g.drawRect((WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384);
-				if (decks[i - 1] != null) {
-					g.drawString("Complete", (WIDTH * SCALE / 6 * (i - 4)) + 72, (HEIGHT * SCALE / 5 * 4));
-				} else {
-					g.drawString("Not Built", (WIDTH * SCALE / 6 * (i - 4)) + 80, (HEIGHT * SCALE / 5 * 4));
+		// If no decks
+		if (NUM_DECKS == 0) {
+			// Highlight
+			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + 48, (HEIGHT * SCALE / 3) + 225, 256, 384)) {
+				g.setColor(Color.blue);
+				g.fillRect((WIDTH * SCALE / 2) + 48, (HEIGHT * SCALE / 3) + 224, 256, 384);
+			}
+			
+			// Label
+			g.setColor(Color.white);
+			g.drawRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3) + 224, 256, 384);
+		
+		// Decks already exist
+		} else {
+			for (int i = 1; i <= MAX_DECKS; i++) {
+				// Decks #1 - #4
+				if (i <= 4) {
+					// Highlight
+					if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3) + 225, 256, 384)) {
+						g.setColor(Color.blue);
+						g.fillRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3) + 224, 256, 384);
+					}
+					
+					// Label
+					g.setColor(Color.white);
+					g.drawRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3) + 224, 256, 384);
+					if (decks[i - 1] != null) {
+						g.drawString("Complete", (WIDTH * SCALE / 6 * i) + 72, (HEIGHT * SCALE / 2) + 182);
+					} else {
+						g.drawString("Not Built", (WIDTH * SCALE / 6 * i) + 80, (HEIGHT * SCALE / 2) + 182);
+					}
+					
 				}
 			}
 		}
+		
 	}
 	
 	// Mouse Events
@@ -125,6 +121,7 @@ public class BuildDeckState extends GameState {
 		
 		// Back
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			NUM_DECKS = 0;
 			gsm.setState(GameStateManager.MENU);
 		}
 
@@ -132,6 +129,8 @@ public class BuildDeckState extends GameState {
 		for (int i = 1; i <= MAX_DECKS; i++) {
 			// Decks #1 - #4
 			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384)) {
+				storage.closeLoad();
+				NUM_DECKS = 0;
 				gsm.setState(GameStateManager.CREATEDECK);
 				create = (CreateDeckState) gsm.getCurrentState();
 				
@@ -149,27 +148,6 @@ public class BuildDeckState extends GameState {
 						create.setDeck(decks[3]);
 						break;
 				}
-			}
-			
-			// Decks #5 - #8
-			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384)) {
-				gsm.setState(GameStateManager.CREATEDECK);
-				create = (CreateDeckState) gsm.getCurrentState();
-				
-				switch (i) {
-				case 5:
-					create.setDeck(decks[4]);
-					break;
-				case 6:
-					create.setDeck(decks[5]);
-					break;
-				case 7:
-					create.setDeck(decks[6]);
-					break;
-				case 8:
-					create.setDeck(decks[7]);
-					break;
-			}
 			}
 		}
 	}

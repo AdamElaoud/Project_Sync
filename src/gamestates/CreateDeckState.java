@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
 import data.DataStorage;
-import entities.Card;
 import entities.Deck;
 import entities.Element;
 import manager.GameStateManager;
@@ -18,12 +17,8 @@ public class CreateDeckState extends GameState {
 	
 	// Deck
 	private Deck deck;
-	private Card[] cards;
 	private FillDeckState fill;
-	
-	// Load and Save
-	private DataStorage storage;
-	
+		
 	// Elements
 	private static final int PRIMARY = 0;
 	private static final int SECONDARY = 1;
@@ -37,12 +32,11 @@ public class CreateDeckState extends GameState {
 			Element.Earth, Element.Shadow, Element.Water, Element.Air};
 	int count;
 
-	public CreateDeckState(GameStateManager gsm, MouseManager mm) {
-		super(gsm, mm);
+	public CreateDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
+		super(gsm, mm, storage);
 	}
 
 	public void init() {
-		storage = new DataStorage();
 		storage.initDeckSave();
 		record = new Element[3];
 		prevRecord = new Element[3];
@@ -51,7 +45,7 @@ public class CreateDeckState extends GameState {
 	public void setDeck(Deck deck) {
 		if (deck != null) {
 			this.deck = deck;
-			cards = deck.getCards();
+			System.out.println(deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
 		} else  {
 			this.deck = new Deck();
 			this.deck.setName("First");
@@ -60,11 +54,6 @@ public class CreateDeckState extends GameState {
 	}
 
 	public void tick() {
-		// update records of elements
-		for (int i = 0; i < 3; i++) {
-			prevRecord[i] = record[i];
-		}
-		
 		for (int i = 0; i < 3; i++) {
 			if (prevRecord[i] != record[i]) {
 				System.out.println("Element Changed!");
@@ -72,7 +61,11 @@ public class CreateDeckState extends GameState {
 				if (!storage.overwriteDeck(deck))
 					storage.saveObject(deck);
 			}
-				
+		}
+		
+		// update records of elements after check (if before, will not register because tick is so fast)
+		for (int i = 0; i < 3; i++) {
+			prevRecord[i] = record[i];
 		}
 	}
 
@@ -210,12 +203,14 @@ public class CreateDeckState extends GameState {
 				
 		// Back
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			storage.closeSave();
 			gsm.setState(GameStateManager.BUILDDECK);
 		}
 		
 		// Next
 		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)
 				&& deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null) {
+			storage.closeSave();
 			gsm.setState(GameStateManager.FILLDECK);
 			fill = (FillDeckState) gsm.getCurrentState();
 			fill.setDeck(deck);
@@ -262,8 +257,7 @@ public class CreateDeckState extends GameState {
 					
 					// Print out Element Selection
 					if (deck != null) {
-						System.out.println("Current: " + record[0] + " " + record[1] + " " + record[2]);
-						System.out.println("Previous: " + prevRecord[0] + " " + prevRecord[1] + " " + prevRecord[2]);
+//						System.out.println(record[0] + " " + record[1] + " " + record[2]);
 					}
 					
 				}

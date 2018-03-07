@@ -27,6 +27,18 @@ public class DataStorage implements Serializable {
 	public DataStorage() {
 		deckSave = new ArrayList<Deck>();
 		
+		try {
+			// Saving
+			saveFile = new FileOutputStream("src\\data\\deckSaveFile.sav");
+			save = new ObjectOutputStream(saveFile);
+			
+			// Loading
+			loadFile = new FileInputStream("src\\data\\deckSaveFile.sav");
+			load = new ObjectInputStream(loadFile);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void initDeckSave() {
@@ -62,6 +74,7 @@ public class DataStorage implements Serializable {
 	public void saveObject(Object obj) {
 		try {
 			save.writeObject(obj);
+			System.out.println("Object " + obj + " saved!");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

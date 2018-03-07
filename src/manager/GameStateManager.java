@@ -2,7 +2,19 @@ package manager;
 
 import java.awt.Graphics2D;
 
-import gamestates.*;
+import data.DataStorage;
+import gamestates.BuildDeckState;
+import gamestates.CreateDeckState;
+import gamestates.EndMatchState;
+import gamestates.FillDeckState;
+import gamestates.GameState;
+import gamestates.MenuState;
+import gamestates.PauseState;
+import gamestates.PlayTurnState;
+import gamestates.SelectCardState;
+import gamestates.SelectDeckState;
+import gamestates.StartMatchState;
+import gamestates.StartupState;
 
 public class GameStateManager {
 
@@ -12,6 +24,7 @@ public class GameStateManager {
 	
 	// Managers
 	MouseManager mm;
+	DataStorage storage;
 	
 	// GSM Setup
 	private GameState[] gameStates;
@@ -33,9 +46,10 @@ public class GameStateManager {
 	// initialize the GSM
 	public GameStateManager() {
 		paused = false;
-		pauseState = new PauseState(this, mm);
+		pauseState = new PauseState(this, mm, storage);
 		
 		mm = new MouseManager();
+		storage = new DataStorage();
 		
 		gameStates = new GameState[NUM_STATES];
 		
@@ -44,6 +58,7 @@ public class GameStateManager {
 	}
 	
 	public void setState(int state) {
+		System.out.println("Changing State!");
 		// unload previous state and set current state
 		previousState = currentState;
 		unloadState(previousState);
@@ -51,43 +66,43 @@ public class GameStateManager {
 		
 		switch(state) {
 			case STARTUP: 
-				gameStates[state] = new StartupState(this, mm);
+				gameStates[state] = new StartupState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case MENU: 
-				gameStates[state] = new MenuState(this, mm);
+				gameStates[state] = new MenuState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case SELECTCARD:
-				gameStates[state] = new SelectCardState(this, mm);
+				gameStates[state] = new SelectCardState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case PLAYTURN:
-				gameStates[state] = new PlayTurnState(this, mm);
+				gameStates[state] = new PlayTurnState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case ENDMATCH:
-				gameStates[state] = new EndMatchState(this, mm);
+				gameStates[state] = new EndMatchState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case STARTMATCH:
-				gameStates[state] = new StartMatchState(this, mm);
+				gameStates[state] = new StartMatchState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case SELECTDECK:
-				gameStates[state] = new SelectDeckState(this, mm);
+				gameStates[state] = new SelectDeckState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case BUILDDECK:
-				gameStates[state] = new BuildDeckState(this, mm);
+				gameStates[state] = new BuildDeckState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case CREATEDECK:
-				gameStates[state] = new CreateDeckState(this, mm);
+				gameStates[state] = new CreateDeckState(this, mm, storage);
 				gameStates[state].init();
 				break;
 			case FILLDECK:
-				gameStates[state] = new FillDeckState(this, mm);
+				gameStates[state] = new FillDeckState(this, mm, storage);
 				gameStates[state].init();
 		}
 	}

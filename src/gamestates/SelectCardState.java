@@ -3,13 +3,14 @@ package gamestates;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import data.DataStorage;
 import manager.GameStateManager;
 import manager.MouseManager;
 
 public class SelectCardState extends GameState {
 
-	public SelectCardState(GameStateManager gsm, MouseManager mm) {
-		super(gsm, mm);
+	public SelectCardState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
+		super(gsm, mm, storage);
 	}
 
 	public void init() {

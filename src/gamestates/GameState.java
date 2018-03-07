@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import data.DataStorage;
 import main.Game;
 import manager.GameStateManager;
 import manager.MouseManager;
@@ -16,10 +17,12 @@ public abstract class GameState implements MouseListener, MouseMotionListener {
 
 	protected MouseManager mm;
 	protected GameStateManager gsm;
+	protected DataStorage storage;
 	
-	public GameState(GameStateManager gsm, MouseManager mm) {
+	public GameState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
 		this.gsm = gsm;
 		this.mm = mm;
+		this.storage = storage;
 	}
 	
 	public abstract void init();

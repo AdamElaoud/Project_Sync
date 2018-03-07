@@ -1,4 +1,5 @@
 /data/
-/gamestates/
-/manager/
 /entities/
+/gamestates/
+/main/
+/manager/
