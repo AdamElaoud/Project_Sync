@@ -25,6 +25,13 @@ public class Deck implements Serializable {
 		r = new Random();
 	}
 	
+	public Deck(String name) {
+		cards = new Card[30];
+		r = new Random();
+		
+		this.name = name;
+	}
+	
 	public Card draw () {
 		int random = r.nextInt(cards.length);
 		return cards[random];

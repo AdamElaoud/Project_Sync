@@ -8,11 +8,12 @@ import data.DataStorage;
 import main.Game;
 import manager.GameStateManager;
 import manager.MouseManager;
+import manager.VisualManager;
 
 public class StartMatchState extends GameState {
 
-	public StartMatchState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
-		super(gsm, mm, storage);
+	public StartMatchState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+		super(gsm, mm, storage, vm);
 	}
 	
 	public void init() {

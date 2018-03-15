@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import data.DataStorage;
 import manager.GameStateManager;
 import manager.MouseManager;
+import manager.VisualManager;
 
 public class MenuState extends GameState {
 					
@@ -17,8 +18,8 @@ public class MenuState extends GameState {
 			"Quit"
 	};
 
-	public MenuState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
-		super(gsm, mm, storage);
+	public MenuState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+		super(gsm, mm, storage, vm);
 	}
 
 	public void init() {

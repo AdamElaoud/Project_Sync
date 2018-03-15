@@ -9,6 +9,7 @@ import data.DataStorage;
 import entities.Deck;
 import manager.GameStateManager;
 import manager.MouseManager;
+import manager.VisualManager;
 
 public class SelectDeckState extends GameState {
 	
@@ -19,8 +20,8 @@ public class SelectDeckState extends GameState {
 	// Load and Save
 	DataStorage storage;
 
-	public SelectDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
-		super(gsm, mm, storage);
+	public SelectDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+		super(gsm, mm, storage, vm);
 		
 		decks = new Deck[MAX_DECKS];
 		

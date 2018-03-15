@@ -8,6 +8,7 @@ import data.DataStorage;
 import main.Game;
 import manager.GameStateManager;
 import manager.MouseManager;
+import manager.VisualManager;
 
 public abstract class GameState implements MouseListener, MouseMotionListener {
 	
@@ -18,11 +19,13 @@ public abstract class GameState implements MouseListener, MouseMotionListener {
 	protected MouseManager mm;
 	protected GameStateManager gsm;
 	protected DataStorage storage;
+	protected VisualManager vm;
 	
-	public GameState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
+	public GameState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
 		this.gsm = gsm;
 		this.mm = mm;
 		this.storage = storage;
+		this.vm = vm;
 	}
 	
 	public abstract void init();

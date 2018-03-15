@@ -25,6 +25,7 @@ public class GameStateManager {
 	// Managers
 	MouseManager mm;
 	DataStorage storage;
+	VisualManager vm;
 	
 	// GSM Setup
 	private GameState[] gameStates;
@@ -46,10 +47,11 @@ public class GameStateManager {
 	// initialize the GSM
 	public GameStateManager() {
 		paused = false;
-		pauseState = new PauseState(this, mm, storage);
+		pauseState = new PauseState(this, mm, storage, vm);
 		
 		mm = new MouseManager();
 		storage = new DataStorage();
+		vm = new VisualManager();		
 		
 		gameStates = new GameState[NUM_STATES];
 		
@@ -66,43 +68,43 @@ public class GameStateManager {
 		
 		switch(state) {
 			case STARTUP: 
-				gameStates[state] = new StartupState(this, mm, storage);
+				gameStates[state] = new StartupState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case MENU: 
-				gameStates[state] = new MenuState(this, mm, storage);
+				gameStates[state] = new MenuState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case SELECTCARD:
-				gameStates[state] = new SelectCardState(this, mm, storage);
+				gameStates[state] = new SelectCardState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case PLAYTURN:
-				gameStates[state] = new PlayTurnState(this, mm, storage);
+				gameStates[state] = new PlayTurnState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case ENDMATCH:
-				gameStates[state] = new EndMatchState(this, mm, storage);
+				gameStates[state] = new EndMatchState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case STARTMATCH:
-				gameStates[state] = new StartMatchState(this, mm, storage);
+				gameStates[state] = new StartMatchState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case SELECTDECK:
-				gameStates[state] = new SelectDeckState(this, mm, storage);
+				gameStates[state] = new SelectDeckState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case BUILDDECK:
-				gameStates[state] = new BuildDeckState(this, mm, storage);
+				gameStates[state] = new BuildDeckState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case CREATEDECK:
-				gameStates[state] = new CreateDeckState(this, mm, storage);
+				gameStates[state] = new CreateDeckState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
 			case FILLDECK:
-				gameStates[state] = new FillDeckState(this, mm, storage);
+				gameStates[state] = new FillDeckState(this, mm, storage, vm);
 				gameStates[state].init();
 		}
 	}

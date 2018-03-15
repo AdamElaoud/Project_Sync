@@ -8,8 +8,7 @@ import java.awt.event.MouseEvent;
 import data.DataStorage;
 import entities.Deck;
 import entities.Element;
-import manager.GameStateManager;
-import manager.MouseManager;
+import manager.*;
 
 public class CreateDeckState extends GameState {
 	
@@ -32,8 +31,8 @@ public class CreateDeckState extends GameState {
 			Element.Earth, Element.Shadow, Element.Water, Element.Air};
 	int count;
 
-	public CreateDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
-		super(gsm, mm, storage);
+	public CreateDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+		super(gsm, mm, storage, vm);
 	}
 
 	public void init() {

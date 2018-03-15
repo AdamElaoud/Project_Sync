@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import data.DataStorage;
 import entities.Card;
 import entities.Deck;
-import manager.GameStateManager;
-import manager.MouseManager;
+import manager.*;
 
 public class FillDeckState extends GameState {
 	
@@ -23,8 +22,8 @@ public class FillDeckState extends GameState {
 	private Card[] cards;
 	private CreateDeckState create;
 	
-	public FillDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
-		super(gsm, mm, storage);
+	public FillDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+		super(gsm, mm, storage, vm);
 	}
 
 	public void init() {

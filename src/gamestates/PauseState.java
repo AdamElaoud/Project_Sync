@@ -6,11 +6,12 @@ import java.awt.event.MouseEvent;
 import data.DataStorage;
 import manager.GameStateManager;
 import manager.MouseManager;
+import manager.VisualManager;
 
 public class PauseState extends GameState {
 
-	public PauseState(GameStateManager gsm, MouseManager mm, DataStorage storage) {
-		super(gsm, mm, storage);
+	public PauseState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+		super(gsm, mm, storage, vm);
 	}
 
 	public void init() {
