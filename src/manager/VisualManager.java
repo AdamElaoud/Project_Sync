@@ -17,6 +17,14 @@ public class VisualManager {
 	private int HEIGHT = Game.HEIGHT;
 	private int SCALE = Game.SCALE;
 	
+	// Deck Box Scales
+	public int dW = 256;
+	public int dH = 384;
+	public int dist = 150;
+	
+	// print exceeds width message once
+	private static int count = 0;
+	
 	public VisualManager() {
 		deckBox = new Rectangle(256, 384);
 		
@@ -30,19 +38,21 @@ public class VisualManager {
 		FontMetrics fm = g.getFontMetrics();
 		Rectangle2D stringBounds = fm.getStringBounds(string, g);
 		
-		if (rect.getWidth() < stringBounds.getWidth()) {
+		if (rect.getWidth() < stringBounds.getWidth() && count < 1) {
 			System.out.println("String width exceeds width of bounding box!");
-			return;
+			count++;
 		}
-		
-		g.setColor(Color.green);
-		g.drawRect(x, y, (int)rect.getWidth(), (int)rect.getHeight());
 		
 		int newX = ((int)rect.getWidth() - (int)stringBounds.getWidth()) / 2;
 		int newY = ((int)rect.getHeight() - (int)stringBounds.getHeight()) / 2 + fm.getAscent();
 		
+		// outline box
+//		g.setColor(Color.green);
+//		g.drawRect(x, y, (int)rect.getWidth(), (int)rect.getHeight());
+					
 		g.setColor(Color.white);
 		g.drawString(string, x + newX, y + newY);
+
 	}
 
 }

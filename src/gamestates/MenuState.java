@@ -45,7 +45,7 @@ public class MenuState extends GameState {
 
 		for (int i = 2; i <= 4; i++) {
 			// Highlight	
-			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192)) {
+			if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192)) {
 				g.setColor(Color.orange);
 				g.fillRect((WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192);
 			}
@@ -77,7 +77,7 @@ public class MenuState extends GameState {
 		mm.setMY(e.getY());
 		
 		for (int i = 2; i <= 4; i++) {
-			if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192)) {
+			if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - 256, (HEIGHT * SCALE * i / 5) - 96, 512, 192)) {
 				switch(i) {
 					case 2: 
 						// (Press Play) Swap Deck Select State
@@ -89,6 +89,7 @@ public class MenuState extends GameState {
 						break;
 					case 4:
 						// (Press Quit) Exit Game 
+						storage.close();
 						System.exit(0);
 						break;
 				}

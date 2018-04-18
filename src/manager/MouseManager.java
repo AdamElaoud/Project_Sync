@@ -10,6 +10,7 @@ import java.awt.geom.Rectangle2D;
 
 public class MouseManager {
 	
+	// some fields are static due to existence of 2 instances (Game.class and GameStateManager.class)
 	public static final int NUM_BUTTONS = 2;
 	
 	public static boolean mouseState[] = new boolean[NUM_BUTTONS];
@@ -52,7 +53,7 @@ public class MouseManager {
 	}
 	
 	// boundary check
-	public boolean withinBoundaries(int mX, int mY, int x, int y, int width, int height) {
+	public boolean within(int mX, int mY, int x, int y, int width, int height) {
 		if (mX >= x && mX <= x + width) {
 			if (mY >= y && mY <= y + height) {
 				return true;

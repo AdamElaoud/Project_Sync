@@ -10,6 +10,9 @@ public class Deck implements Serializable {
 	private Random r;
 	private Card[] cards;
 	
+	private int id;
+	private static int idCount = 0;
+	
 	private String name;
 	
 	private Element primary;
@@ -21,12 +24,18 @@ public class Deck implements Serializable {
 	private static final int TERTIARY = 2;
 	
 	public Deck() {
-		cards = new Card[30];
+		incrementId();
+		id = idCount;
+		
+		cards = new Card[40];
 		r = new Random();
 	}
 	
 	public Deck(String name) {
-		cards = new Card[30];
+		incrementId();
+		id = idCount;
+		
+		cards = new Card[40];
 		r = new Random();
 		
 		this.name = name;
@@ -39,6 +48,18 @@ public class Deck implements Serializable {
 	
 	public Card[] getCards() {
 		return cards;
+	}
+	
+	public void addCard(String card) {
+		
+		for (int i = 0; i < cards.length; i++) {
+			
+		}
+	}
+	
+	public void removeCard(String card) {
+		Card add = parseCard(card);
+		
 	}
 	
 	public void setName(String name) {
@@ -72,6 +93,27 @@ public class Deck implements Serializable {
 				return secondary;
 			case TERTIARY:
 				return tertiary;
+		}
+		
+		return null;
+	}
+	
+	public void incrementId() {
+		idCount++;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public Card parseCard(String card) {
+		switch (card) {
+			case "Stockpile":
+				break;
 		}
 		
 		return null;

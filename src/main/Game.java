@@ -28,12 +28,12 @@ public class Game extends Canvas implements Runnable {
 	private GameState currentState;
 	
 	// render
-	BufferStrategy bs;
-	Graphics2D g;
+	private BufferStrategy bs;
+	private Graphics2D g;
 	
 	// managers
-	GameStateManager gsm;
-	MouseManager mm;
+	private GameStateManager gsm;
+	private MouseManager mm;
 
 	public Game() {
 		setPreferredSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE));

@@ -13,24 +13,23 @@ import manager.VisualManager;
 
 public class SelectDeckState extends GameState {
 	
-	private static int NUM_DECKS = 0;
-	private static int MAX_DECKS = 8;
+	private int NUM_DECKS = 0;
+	private final int MAX_DECKS = 8;
 	private static Deck decks[];
 	
-	// Load and Save
-	DataStorage storage;
-
 	public SelectDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
 		super(gsm, mm, storage, vm);
 		
 		decks = new Deck[MAX_DECKS];
-		
-		storage = new DataStorage();
 	}
 	
 	public void init() {
-		storage.initDeckSave();
 		Object obj = storage.loadObjects();
+		
+		if (obj == null) {
+			storage.resetDeckLoad();
+			obj = storage.loadObjects();
+		}
 		
 		while (obj != null && NUM_DECKS < MAX_DECKS) {
 			if (obj instanceof Deck) {
@@ -42,8 +41,7 @@ public class SelectDeckState extends GameState {
 			obj = storage.loadObjects();			
 		}
 		
-		storage.closeLoad();
-		storage.closeSave();
+		System.out.println("Num Decks: " + NUM_DECKS);
 
 	}
 
@@ -65,7 +63,7 @@ public class SelectDeckState extends GameState {
 		
 		// BACK
 		g.setFont(new Font("Arial", Font.PLAIN, 72));
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			g.setColor(Color.cyan);
 			g.fillRect(48, 48, 256, 128);
 		}
@@ -80,7 +78,7 @@ public class SelectDeckState extends GameState {
 			// Decks #1 - #4
 			if (i <= 4) {
 				// Highlight
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384)) {
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384)) {
 					g.setColor(Color.blue);
 					g.fillRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384);
 				}
@@ -88,7 +86,7 @@ public class SelectDeckState extends GameState {
 				// Label
 				g.setColor(Color.white);
 				g.drawRect((WIDTH * SCALE / 6 * i) + 48, (HEIGHT * SCALE / 3), 256, 384);
-				if (decks[0] != null) {
+				if (decks[i - 1] != null) {
 					g.drawString("Complete", (WIDTH * SCALE / 6 * i) + 72, (HEIGHT * SCALE / 2) - 42);
 				} else {
 					g.drawString("Not Built", (WIDTH * SCALE / 6 * i) + 80, (HEIGHT * SCALE / 2) - 42);
@@ -97,7 +95,7 @@ public class SelectDeckState extends GameState {
 			// Decks #5 - #8
 			} else {
 				// Highlight
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384)) {
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384)) {
 					g.setColor(Color.orange);
 					g.fillRect((WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384);
 				}
@@ -105,7 +103,7 @@ public class SelectDeckState extends GameState {
 				// Label
 				g.setColor(Color.white);
 				g.drawRect((WIDTH * SCALE / 6 * (i - 4)) + 48, (HEIGHT * SCALE / 3 * 2), 256, 384);
-				if (decks[0] != null) {
+				if (decks[i - 1] != null) {
 					g.drawString("Complete", (WIDTH * SCALE / 6 * (i - 4)) + 72, (HEIGHT * SCALE / 5 * 4));
 				} else {
 					g.drawString("Not Built", (WIDTH * SCALE / 6 * (i - 4)) + 80, (HEIGHT * SCALE / 5 * 4));
@@ -121,7 +119,7 @@ public class SelectDeckState extends GameState {
 		mm.setMY(e.getY());
 		
 		// Back
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			gsm.setState(GameStateManager.MENU);
 		}
 		

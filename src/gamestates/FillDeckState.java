@@ -62,7 +62,7 @@ public class FillDeckState extends GameState {
 								
 				// BACK
 				g.setFont(new Font("Arial", Font.PLAIN, 72));
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+				if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 					g.setColor(Color.cyan);
 					g.fillRect(48, 48, 256, 128);
 				}
@@ -71,7 +71,7 @@ public class FillDeckState extends GameState {
 				g.drawRect(48, 48, 256, 128);
 				
 				// NEXT
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)) {
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)) {
 					if (full) {
 						g.setColor(Color.cyan);
 					} else {
@@ -95,8 +95,7 @@ public class FillDeckState extends GameState {
 		mm.setMY(e.getY());
 		
 		// Back
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
-			storage.closeSave();
+		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			gsm.setState(GameStateManager.CREATEDECK);
 			create = (CreateDeckState) gsm.getCurrentState();
 			create.setDeck(deck);

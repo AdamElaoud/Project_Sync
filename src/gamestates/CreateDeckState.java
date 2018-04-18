@@ -36,7 +36,6 @@ public class CreateDeckState extends GameState {
 	}
 
 	public void init() {
-		storage.initDeckSave();
 		record = new Element[3];
 		prevRecord = new Element[3];
 	}
@@ -82,7 +81,7 @@ public class CreateDeckState extends GameState {
 		
 		// BACK
 		g.setFont(new Font("Arial", Font.PLAIN, 72));
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			g.setColor(Color.cyan);
 			g.fillRect(48, 48, 256, 128);
 		}
@@ -91,7 +90,7 @@ public class CreateDeckState extends GameState {
 		g.drawRect(48, 48, 256, 128);
 		
 		// NEXT
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)) {
+		if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)) {
 			if (deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null ) {
 				g.setColor(Color.cyan);
 			} else {
@@ -136,7 +135,7 @@ public class CreateDeckState extends GameState {
 		for (int i = 2; i <= 4; i++) {
 			for (int j = 0; j < MAX_ELEMENTS; j++) {
 				// Highlight
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
+				if (mm.within(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
 					g.setColor(Color.lightGray);
 					g.fillRect(256 + (j * 196) - 10, (HEIGHT * SCALE * i / 5) + 40, 148, 80);
 				}		
@@ -201,15 +200,13 @@ public class CreateDeckState extends GameState {
 		mm.setMY(e.getY());
 				
 		// Back
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
-			storage.closeSave();
+		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
 			gsm.setState(GameStateManager.BUILDDECK);
 		}
 		
 		// Next
-		if (mm.withinBoundaries(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)
+		if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)
 				&& deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null) {
-			storage.closeSave();
 			gsm.setState(GameStateManager.FILLDECK);
 			fill = (FillDeckState) gsm.getCurrentState();
 			fill.setDeck(deck);
@@ -218,7 +215,7 @@ public class CreateDeckState extends GameState {
 		// Select Elements
 		for (int i = 2; i <= 4; i++) {
 			for (int j = 0; j < MAX_ELEMENTS; j++) {
-				if (mm.withinBoundaries(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
+				if (mm.within(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
 					switch (j) {
 					case 0: 
 						deck.setElement(i - 2, Element.Time);
@@ -256,7 +253,7 @@ public class CreateDeckState extends GameState {
 					
 					// Print out Element Selection
 					if (deck != null) {
-//						System.out.println(record[0] + " " + record[1] + " " + record[2]);
+						System.out.println(record[0] + " " + record[1] + " " + record[2]);
 					}
 					
 				}
