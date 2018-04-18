@@ -51,6 +51,7 @@ public class Deck implements Serializable {
 	}
 	
 	public void addCard(String card) {
+		Card add = parseCard(card);
 		
 		for (int i = 0; i < cards.length; i++) {
 			
@@ -58,7 +59,8 @@ public class Deck implements Serializable {
 	}
 	
 	public void removeCard(String card) {
-		Card add = parseCard(card);
+		Card remove = parseCard(card);
+		
 		
 	}
 	
