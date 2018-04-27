@@ -73,7 +73,7 @@ public class BuildDeckState extends GameState {
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.PLAIN, 140));
 		
-		// MENU
+		// TITLE
 		g.drawString("Build A Deck", (WIDTH * SCALE / 2) - 536 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
 		
 		// BACK
@@ -104,143 +104,124 @@ public class BuildDeckState extends GameState {
 				
 				break;
 			case 1:
-				for (int i = 0; i <= NUM_DECKS; i++) {
-					if (i == 0) {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.getDeckBox());
-						
-					} else {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, "New", (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
-					}
-					
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
-				
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.getDeckBox());
+					
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
+				}
+					
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, "New", (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
+									
 				break;
 			case 2:
-				for (int i = 0; i <= NUM_DECKS; i++) {
-					if (i == 0) {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.getDeckBox());
-						
-					} else if(i == 1) {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
-						
-					} else {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, "New", (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.getDeckBox());
-					}
-					
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
 				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.getDeckBox());
+						
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
+				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
+						
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
+				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, "New", (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.getDeckBox());
+					
 				break;
 			case 3:
 				// case 3 = case 4
 			case 4:
-				for (int i = 0; i <= 3; i++) {
-					if (i == 0) {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - (vm.dW * 2) - vm.dist, iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.getDeckBox());
-						
-					} else if(i == 1) {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.getDeckBox());
-						
-					} else if (i == 2) {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
-						vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
-					
-					} else {
-						// Highlight
-						if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
-							// Color set
-							g.setColor(Color.cyan);							
-							g.fillRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
-						}
-						
-						// Label
-						g.setColor(Color.white);
-						g.drawRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
-						
-						if (NUM_DECKS == 4)
-							vm.centerText(g, decks[i].getName(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.getDeckBox());
-						else
-							vm.centerText(g, "New", (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.getDeckBox());
-					}
-					
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - (vm.dW * 2) - vm.dist, iconHeight, vm.dW, vm.dH);
 				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.getDeckBox());
+						
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
+				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.getDeckBox());
+						
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
+				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
+				vm.centerText(g, decks[2].getName(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
+					
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
+					// Color set
+					g.setColor(Color.cyan);							
+					g.fillRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
+				}
+						
+				// Label
+				g.setColor(Color.white);
+				g.drawRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
+					
+				if (NUM_DECKS == 4)
+					vm.centerText(g, decks[3].getName(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.getDeckBox());
+				else
+					vm.centerText(g, "New", (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.getDeckBox());
+					
 				break;
 		}
 		

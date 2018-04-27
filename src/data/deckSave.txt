@@ -6,9 +6,9 @@ First
 Primary: 
 Time
 Secondary: 
-Fire
+Time
 Tertiary: 
-Life
+Time
 Cards:
 Cards End
 DECK END
@@ -20,9 +20,9 @@ Second
 Primary: 
 Fire
 Secondary: 
-Life
+Fire
 Tertiary: 
-Thunder
+Fire
 Cards:
 Cards End
 DECK END
@@ -34,9 +34,9 @@ Third
 Primary: 
 Life
 Secondary: 
-Thunder
+Life
 Tertiary: 
-Earth
+Life
 Cards:
 Cards End
 DECK END
@@ -48,9 +48,9 @@ Fourth
 Primary: 
 Thunder
 Secondary: 
-Earth
+Thunder
 Tertiary: 
-Shadow
+Thunder
 Cards:
 Cards End
 DECK END

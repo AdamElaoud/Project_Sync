@@ -3,6 +3,9 @@ package entities;
 import java.io.Serializable;
 import java.util.Random;
 
+import entities.runes.MinorRune;
+import entities.runes.Rune;
+
 public class Deck implements Serializable {
 
 	private static final long serialVersionUID = -2789526004895896331L;
@@ -19,20 +22,20 @@ public class Deck implements Serializable {
 	private Element secondary;
 	private Element tertiary;
 	
+	private Rune majorRune;
+	private Rune minorRune;
+	
 	private static final int PRIMARY = 0;
 	private static final int SECONDARY = 1;
 	private static final int TERTIARY = 2;
 	
 	public Deck() {
-		idCount++;
-		id = idCount;
-		
 		cards = new Card[40];
 		r = new Random();
 	}
 	
 	public Deck(String name) {
-		idCount++;
+		incrementId();
 		id = idCount;
 		
 		cards = new Card[40];
@@ -109,6 +112,14 @@ public class Deck implements Serializable {
 		return null;
 	}
 	
+	public void incrementId() {
+		idCount++;
+	}
+	
+	public static void setIdCount(int count) {
+		idCount = count;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -124,5 +135,21 @@ public class Deck implements Serializable {
 		}
 		
 		return null;
+	}
+	
+	public void setMinorRune(MinorRune rune ) {
+		minorRune = rune;
+	}
+	
+	public Rune getMinorRune() {
+		return minorRune;
+	}
+	
+	public void setMajorRune(Rune rune) {
+		majorRune = rune;
+	}
+	
+	public Rune getMajorRune() {
+		return majorRune;
 	}
 }

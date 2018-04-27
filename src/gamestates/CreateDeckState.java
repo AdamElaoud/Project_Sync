@@ -69,7 +69,7 @@ public class CreateDeckState extends GameState {
 		g.setColor(Color.white);
 		g.setFont(new Font("Arial", Font.PLAIN, 140));
 		
-		// MENU
+		// TITLE
 		g.drawString("Deck Builder", (WIDTH * SCALE / 2) - 512 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
 		
 		// BACK

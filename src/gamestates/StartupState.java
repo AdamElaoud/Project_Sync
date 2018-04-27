@@ -19,6 +19,35 @@ public class StartupState extends GameState {
 
 	public void init() {
 		// Will load logo in this method
+
+		String line;
+		Deck temp;
+		int idCount = 0;
+		
+		try {
+			if (storage.setupLoad()) {
+				line = storage.load();
+				
+				if (line != null && line.equals("DECK START")) {
+					while (line != null) {
+						temp = storage.buildDeck();
+						
+						if (temp.getId() > idCount)
+							idCount = temp.getId();
+						
+						line = storage.load();
+					}
+				}
+	
+				storage.loadClose();
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Deck.setIdCount(idCount);
+		System.out.println("Id Count Set To: " + idCount);
 	}
 
 	public void tick() {
