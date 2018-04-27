@@ -32,21 +32,28 @@ public class BuildDeckState extends GameState {
 
 	public void init() {
 		String line;
-		int i = 0;
 		
 		try {
-			storage.setupLoad();
-			
-			line = storage.load();
-			while (line != null) {
-				if (line.equals("DECK START\n"))
-					decks[i] = storage.buildDeck();
+			if (storage.setupLoad()) {
+				line = storage.load();
+				
+				if (line != null && line.equals("DECK START")) {
+					while (line != null && NUM_DECKS < MAX_DECKS) {
+						decks[NUM_DECKS] = storage.buildDeck();
+						System.out.println("Loaded deck: " + decks[NUM_DECKS].getName() + ", ID: " + decks[NUM_DECKS].getId());
+						System.out.println("Elements: " + decks[NUM_DECKS].getElement(0) + " " + decks[NUM_DECKS].getElement(1) + " " + decks[NUM_DECKS].getElement(2));
+						
+						NUM_DECKS++;
+						line = storage.load();
+					}
+				}
+	
+				storage.loadClose();
 			}
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 				
 		System.out.println("Num Decks: " + NUM_DECKS);
 		System.out.println("Decks: " + decks[0] + " " + decks[1] + " " + decks[2] + " " + decks[3]);
@@ -251,110 +258,89 @@ public class BuildDeckState extends GameState {
 		}
 				
 		switch(NUM_DECKS) {
-		case 0: 
-			// Highlight
-			if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-				gsm.setState(GameStateManager.CREATEDECK);
-				create = (CreateDeckState) gsm.getCurrentState();
+			case 0: 
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
 				
-				// default test deck #1
-				create.setDeck(new Deck("First"));
-			}
+					// default test deck #1
+					create.setDeck(new Deck("First"));
+				}
 			
-			break;
-		case 1:
-			for (int i = 0; i <= NUM_DECKS; i++) {
-				if (i == 0) {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-						create.setDeck(decks[i]);
-					}
-					
-				} else {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-
-						// default test deck #2
-						create.setDeck(new Deck("Second"));
-
-					}
+				break;
+			case 1:
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+					create.setDeck(decks[0]);
+				}
+			
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+				
+					// default test deck #2
+					create.setDeck(new Deck("Second"));
 				}
 				
-			}
-			
-			break;
-		case 2:
-			for (int i = 0; i <= NUM_DECKS; i++) {
-				if (i == 0) {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-						create.setDeck(decks[i]);
-					}
+				break;
+			case 2:
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+					create.setDeck(decks[0]);
+				}
 					
-				} else if(i == 1) {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-						create.setDeck(decks[i]);
-					}
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+					create.setDeck(decks[1]);
+				}
 					
-				} else {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
 
-						// default test deck #3
-						create.setDeck(new Deck("Third"));
-					}
+					// default test deck #3
+					create.setDeck(new Deck("Third"));
 				}
 				
-			}
-			break;
-		case 3:
-			// case 3 = case 4
-		case 4:
-			for (int i = 0; i <= 3; i++) {
-				if (i == 0) {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-						create.setDeck(decks[i]);
-					}
+				break;
+			case 3:
+				// case 3 = case 4
+			case 4:
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+					create.setDeck(decks[0]);
+				}
+				
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+					create.setDeck(decks[1]);
+				}
 					
-				} else if(i == 1) {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-						create.setDeck(decks[i]);
-					}
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
+					create.setDeck(decks[2]);
+				}
 					
-				} else if (i == 2) {
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-						create.setDeck(decks[i]);
-					}
-					
-				} else {
-					// Highlight
-					if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
-						gsm.setState(GameStateManager.CREATEDECK);
-						create = (CreateDeckState) gsm.getCurrentState();
-					}
+				// Highlight
+				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
+					gsm.setState(GameStateManager.CREATEDECK);
+					create = (CreateDeckState) gsm.getCurrentState();
 					
 					if (NUM_DECKS == 4)
-						create.setDeck(decks[i]);
+						create.setDeck(decks[3]);
 					else
 						create.setDeck(new Deck("Fourth"));
 				}
 				
-			}
-			break;
+				break;
 		}
-
 	}
 
 	public void mouseEntered(MouseEvent e) {

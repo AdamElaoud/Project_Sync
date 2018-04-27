@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -50,69 +51,241 @@ public class DataStorage implements Serializable {
 		buffWriter = new BufferedWriter(writer);
 	}
 	
-	public void setupLoad() throws FileNotFoundException {
+	public boolean setupLoad() {
 		// load
-		reader = new FileReader("src\\data\\deckSave.txt");
-		buffReader = new BufferedReader(reader);
+		try {
+			reader = new FileReader("src\\data\\deckSave.txt");
+			buffReader = new BufferedReader(reader);
+		} catch (FileNotFoundException e) {
+			System.out.println("File does not exist yet!");
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public void save(String text) throws IOException {
-		buffWriter.write(text);
+		if (text == null) 
+			buffWriter.write("null\n");
+		else 
+			buffWriter.write(text);
 	}
 	
 	public String load() throws IOException {
-		return buffReader.readLine();
+		String line = buffReader.readLine();
+		
+		//System.out.println("Read: " + line);
+		return line;
 	}
 	
 	public void saveClose() throws IOException {
-		save.close();
+		buffWriter.close();
 	}
 	
 	public void loadClose() throws IOException {
-		load.close();
+		buffReader.close();
 	}
 	
 	public Deck buildDeck() throws IOException {
+		System.out.println("Building Deck");
 		String line;
 		Deck compiled = new Deck();
 		
 		line = load();
-		while (!line.equals("DECK END")) {
+
+		while (line != null && !line.equals("DECK END")) {
 			switch (line) {
-				case "ID:\n":
+				case "ID: ":
 					line = load();
-					compiled.setId(Integer.parseInt(line));
+					Character val = line.charAt(0);
+					compiled.setId(Integer.parseInt(val.toString()));
 					break;
-				case "Name:\n":
+				case "Name: ":
 					line = load();
 					compiled.setName(line);
 					break;
-				case "Primary:\n":
+				case "Primary: ":
 					line = load();
-					compiled.setElement(0, parseElement(line));
+					compiled.setElement(0, parseStringToElement(line));
 					break;
-				case "Secondary:\n":
+				case "Secondary: ":
 					line = load();
-					compiled.setElement(1, parseElement(line));
+					compiled.setElement(1, parseStringToElement(line));
 					break;
-				case "Tertiary:\n":
+				case "Tertiary: ":
 					line = load();
-					compiled.setElement(2, parseElement(line));
+					compiled.setElement(2, parseStringToElement(line));
 					break;
-				case "Cards:\n":
+				case "Cards: ":
 					line = load();
-					while (!line.equals("DECK END\n")) {
-						
+					while (!line.equals("Cards End")) {
+						compiled.addCard(line);
+						line = load();
 					}
 					break;
-					
 			}
 			
 			line = load();
 		}
+		
+		return compiled;
 	}
 	
-	private Element parseElement(String element) {
+	public Deck[] currentSave() throws IOException {
+		if (!isEmpty("src\\data\\deckSave.txt")) {
+			String line;
+			int i = 0;
+			Deck[] decks = new Deck[4];
+			
+			System.out.println("Checking Current Data");
+			
+			try {
+				if (setupLoad()) {
+					line = load();
+					
+					while (line != null && line.equals("DECK START") && i < 4) {
+						decks[i] = buildDeck();
+						i++;
+						line = load();
+					}	
+		
+					loadClose();
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			for (Deck deck : decks) {
+				if (deck != null) {
+					System.out.println("Checked Deck: " + deck.getName() + "ID: " + deck.getId());
+					System.out.println("Elements: " + deck.getElement(0) + " " + deck.getElement(1) + " " + deck.getElement(2));
+				}
+			}
+
+			System.out.println("Data Check Complete");
+			return decks;
+		}
+		
+		System.out.println("No Previous Data To Check");
+		return null;
+	}
+	
+	public void saveDeck(Deck deck) throws IOException {
+		Deck[] decks = currentSave();
+		boolean saved = false;
+		
+		// save setup
+		try {
+			setupSave();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		// if no decks exist
+		if (decks == null) {
+			// save first deck
+			save("DECK START\r\n");
+			save("ID: \n");
+			save(Integer.toString(deck.getId()) + "\r\n");
+			save("Name: \n");
+			save(deck.getName() + "\r\n");
+			save("Primary: \n");
+			save(parseElementToString(deck.getElement(0)) + "\r\n");
+			save("Secondary: \n");
+			save(parseElementToString(deck.getElement(1)) + "\r\n");
+			save("Tertiary: \n");
+			save(parseElementToString(deck.getElement(2)) + "\r\n");
+			save("Cards:\r\n");
+			for (int j = 0; j < deck.getCards().length; j++) {
+				if (deck.getCards()[j] != null)
+					save(deck.getCards()[j].getName() + "\r\n");
+			}
+			save("Cards End\r\n");
+			save("DECK END\r\n");
+			
+		} else {
+			// save all current data
+			for (int i = 0; i < decks.length; i++) {
+				if(decks[i] != null && decks[i].getId() != deck.getId()) {
+					
+					System.out.println("Saving Deck: " + decks[i].getName());
+					
+					save("DECK START\r\n");
+					save("ID: \n");
+					save(Integer.toString(decks[i].getId()) + "\r\n");
+					save("Name: \n");
+					save(decks[i].getName() + "\r\n");
+					save("Primary: \n");
+					save(parseElementToString(decks[i].getElement(0)) + "\r\n");
+					save("Secondary: \n");
+					save(parseElementToString(decks[i].getElement(1)) + "\r\n");
+					save("Tertiary: \n");
+					save(parseElementToString(decks[i].getElement(2)) + "\r\n");
+					save("Cards:\r\n");
+					for (int j = 0; j < decks[i].getCards().length; j++) {
+						if (decks[i].getCards()[j] != null)
+							save(decks[i].getCards()[j].getName() + "\r\n");
+					}
+					save("Cards End\r\n");
+					save("DECK END\r\n");			
+				} else {
+					if (!saved) {
+						
+						System.out.println("Saving New Deck: " + deck.getName());
+						
+						// save new deck/overwrite
+						save("DECK START\r\n");
+						save("ID: \n");
+						save(Integer.toString(deck.getId()) + "\r\n");
+						save("Name: \n");
+						save(deck.getName() + "\r\n");
+						save("Primary: \n");
+						save(parseElementToString(deck.getElement(0)) + "\r\n");
+						save("Secondary: \n");
+						save(parseElementToString(deck.getElement(1)) + "\r\n");
+						save("Tertiary: \n");
+						save(parseElementToString(deck.getElement(2)) + "\r\n");
+						save("Cards:\r\n");
+						for (int j = 0; j < deck.getCards().length; j++) {
+							if (deck.getCards()[j] != null)
+								save(deck.getCards()[j].getName() + "\r\n");
+						}
+						save("Cards End\r\n");
+						save("DECK END\r\n");
+						
+						saved = true;
+					}
+				}
+					
+			}
+		}
+		
+		saveClose();
+				
+	}
+	
+	private boolean isEmpty(String file) {
+		FileReader read;
+		try {
+			read = new FileReader(file);
+			BufferedReader buffRead = new BufferedReader(read);
+			
+			if(buffRead.readLine() == null)
+				return true;
+			else
+				return false;
+			
+		} catch (IOException e) {
+			return true;
+		}
+		
+	}
+	
+	private Element parseStringToElement(String element) {
+		if (element == null)
+			return null;
+		
 		switch (element) {
 			case "Time":
 				return Element.Time;
@@ -130,9 +303,34 @@ public class DataStorage implements Serializable {
 				return Element.Water;
 			case "Air":
 				return Element.Air;
-		
 		}
 		
+		return null;
+	}
+	
+	private String parseElementToString(Element element) {
+		if (element == null)
+			return null;
+			
+		switch (element) {
+			case Time:
+				return "Time";
+			case Fire:
+				return "Fire";
+			case Life:
+				return "Life";
+			case Thunder:
+				return "Thunder";
+			case Earth:
+				return "Earth";
+			case Shadow:
+				return "Shadow";
+			case Water:
+				return "Water";
+			case Air:
+				return "Air";
+		}
+	
 		return null;
 	}
 	

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import data.DataStorage;
 import entities.Deck;
@@ -22,8 +23,8 @@ public class CreateDeckState extends GameState {
 	private static final int PRIMARY = 0;
 	private static final int SECONDARY = 1;
 	private static final int TERTIARY = 2;
-	private Element[] record;
-	private Element[] prevRecord;
+	private Element[] record = new Element[3];
+	private Element[] prevRecord = new Element[3];
 	
 	// Element List
 	private static Element[] elements = {
@@ -36,32 +37,24 @@ public class CreateDeckState extends GameState {
 	}
 
 	public void init() {
-		record = new Element[3];
-		prevRecord = new Element[3];
+
 	}
 	
 	public void setDeck(Deck deck) {
 		if (deck != null) {
 			this.deck = deck;
-			System.out.println(deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
+			System.out.println("Elements: " + deck.getElement(PRIMARY) + " " + deck.getElement(SECONDARY) + " " + deck.getElement(TERTIARY));
 		} else  {
 			this.deck = new Deck();
-			this.deck.setName("First");
+			this.deck.setName("Default");
 		}
 		
+		System.out.println("Creating Deck: " + deck.getName() + ", ID: " + deck.getId());
+
 	}
 
 	public void tick() {
-		for (int i = 0; i < 3; i++) {
-			if (prevRecord[i] != record[i]) {
-				System.out.println("Element Changed!");
-				// if element is changed, initiate save
-				if (!storage.overwriteDeck(deck))
-					storage.saveObject(deck);
-			}
-		}
-		
-		// update records of elements after check (if before, will not register because tick is so fast)
+		// update records of elements 
 		for (int i = 0; i < 3; i++) {
 			prevRecord[i] = record[i];
 		}
@@ -201,12 +194,25 @@ public class CreateDeckState extends GameState {
 				
 		// Back
 		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			try {
+				storage.saveDeck(deck);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+			
 			gsm.setState(GameStateManager.BUILDDECK);
 		}
 		
 		// Next
 		if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)
 				&& deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null) {
+			
+			try {
+				storage.saveDeck(deck);
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+			
 			gsm.setState(GameStateManager.FILLDECK);
 			fill = (FillDeckState) gsm.getCurrentState();
 			fill.setDeck(deck);
@@ -253,7 +259,7 @@ public class CreateDeckState extends GameState {
 					
 					// Print out Element Selection
 					if (deck != null) {
-						System.out.println(record[0] + " " + record[1] + " " + record[2]);
+						System.out.println("Elements Updated! " + record[0] + " " + record[1] + " " + record[2]);
 					}
 					
 				}

@@ -24,7 +24,7 @@ public class Deck implements Serializable {
 	private static final int TERTIARY = 2;
 	
 	public Deck() {
-		incrementId();
+		idCount++;
 		id = idCount;
 		
 		cards = new Card[40];
@@ -32,7 +32,7 @@ public class Deck implements Serializable {
 	}
 	
 	public Deck(String name) {
-		incrementId();
+		idCount++;
 		id = idCount;
 		
 		cards = new Card[40];
@@ -54,14 +54,23 @@ public class Deck implements Serializable {
 		Card add = parseCard(card);
 		
 		for (int i = 0; i < cards.length; i++) {
-			
+			if (cards[i] == null) {
+				cards[i] = add;
+				return;
+			}
 		}
 	}
 	
 	public void removeCard(String card) {
 		Card remove = parseCard(card);
 		
-		
+		for (int i = 0; i < cards.length; i++) {
+			if (cards[i] == remove) {
+				// include num copies field
+				cards[i] = null;
+				return;
+			}
+		}
 	}
 	
 	public void setName(String name) {
@@ -98,10 +107,6 @@ public class Deck implements Serializable {
 		}
 		
 		return null;
-	}
-	
-	public void incrementId() {
-		idCount++;
 	}
 	
 	public int getId() {

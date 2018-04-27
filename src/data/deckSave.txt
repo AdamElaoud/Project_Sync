@@ -1,0 +1,56 @@
+DECK START
+ID: 
+1
+Name: 
+First
+Primary: 
+Time
+Secondary: 
+Fire
+Tertiary: 
+Life
+Cards:
+Cards End
+DECK END
+DECK START
+ID: 
+2
+Name: 
+Second
+Primary: 
+Fire
+Secondary: 
+Life
+Tertiary: 
+Thunder
+Cards:
+Cards End
+DECK END
+DECK START
+ID: 
+3
+Name: 
+Third
+Primary: 
+Life
+Secondary: 
+Thunder
+Tertiary: 
+Earth
+Cards:
+Cards End
+DECK END
+DECK START
+ID: 
+4
+Name: 
+Fourth
+Primary: 
+Thunder
+Secondary: 
+Earth
+Tertiary: 
+Shadow
+Cards:
+Cards End
+DECK END

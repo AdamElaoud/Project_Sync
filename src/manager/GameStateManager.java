@@ -60,11 +60,12 @@ public class GameStateManager {
 	}
 	
 	public void setState(int state) {
-		System.out.println("Changing State!");
 		// unload previous state and set current state
 		previousState = currentState;
 		unloadState(previousState);
 		currentState = state;
+		
+		System.out.println("Changed to state: " + state);
 		
 		switch(state) {
 			case STARTUP: 

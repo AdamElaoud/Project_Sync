@@ -18,12 +18,6 @@ public class StartupState extends GameState {
 	}
 
 	public void init() {
-		try {
-			storage.setupSave();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		// Will load logo in this method
 	}
 

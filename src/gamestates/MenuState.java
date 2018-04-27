@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import data.DataStorage;
 import manager.GameStateManager;
@@ -88,8 +89,7 @@ public class MenuState extends GameState {
 						gsm.setState(GameStateManager.BUILDDECK);
 						break;
 					case 4:
-						// (Press Quit) Exit Game 
-						storage.close();
+						// (Press Quit) Exit Game
 						System.exit(0);
 						break;
 				}
