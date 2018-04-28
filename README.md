@@ -114,5 +114,4 @@ Character Components:
 	- Neera: Dark Secrets
 	- The Darkside Detective
 	- Thy Sword
-	- 
 
