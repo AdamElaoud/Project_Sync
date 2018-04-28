@@ -3,6 +3,7 @@ package gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -21,7 +22,7 @@ public class BuildDeckState extends GameState {
 	
 	// Decks
 	private static Deck decks[];
-	private CreateDeckState create;
+	private SelectElementsState select;
 	
 	public BuildDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
 		super(gsm, mm, storage, vm);
@@ -66,39 +67,39 @@ public class BuildDeckState extends GameState {
 
 	public void render(Graphics2D g) {
 		// reset background
-		g.setColor(Color.darkGray);
+		g.setColor(Color.white);
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		
 		// setting font
-		g.setColor(Color.white);
-		g.setFont(new Font("Arial", Font.PLAIN, 140));
+		g.setColor(Color.black);
+		g.setFont(new Font("Courier", Font.PLAIN, 140));
 		
 		// TITLE
-		g.drawString("Build A Deck", (WIDTH * SCALE / 2) - 536 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
+		vm.centerText(g, "BUILD A DECK", 0, 0, new Rectangle(WIDTH * SCALE, (HEIGHT * SCALE / 5) + 250));
 		
 		// BACK
-		g.setFont(new Font("Arial", Font.PLAIN, 72));
+		g.setFont(new Font("Courier", Font.PLAIN, 72));
 		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
-			g.setColor(Color.cyan);
+			g.setColor(new Color(175, 242, 255, 255));
 			g.fillRect(48, 48, 256, 128);
 		}
-		g.setColor(Color.white);
-		g.drawString("Back", 96, 136);
+		g.setColor(Color.black);
+		vm.centerText(g, "Back", 48, 48, new Rectangle(256, 128));
 		g.drawRect(48, 48, 256, 128);
 		
 		// reset font for decks
-		g.setFont(new Font("Arial", Font.PLAIN, 48));
+		g.setFont(new Font("Courier", Font.PLAIN, 48));
 		
 		switch(NUM_DECKS) {
 			case 0: 
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-					g.setColor(Color.cyan);
+					g.setColor(new Color(175, 242, 255, 255));
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				}
 				
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, "New", (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
 				
@@ -107,24 +108,24 @@ public class BuildDeckState extends GameState {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.getDeckBox());
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, "New", (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
 									
@@ -133,36 +134,36 @@ public class BuildDeckState extends GameState {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.getDeckBox());
 						
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
 						
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, "New", (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.getDeckBox());
 					
@@ -173,48 +174,48 @@ public class BuildDeckState extends GameState {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - (vm.dW * 2) - vm.dist, iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.getDeckBox());
 						
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.getDeckBox());
 						
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[2].getName(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
 				}
 						
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
 					
 				if (NUM_DECKS == 4)
@@ -242,49 +243,49 @@ public class BuildDeckState extends GameState {
 			case 0: 
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
 				
 					// default test deck #1
-					create.setDeck(new Deck("First"));
+					select.setDeck(new Deck("First"));
 				}
 			
 				break;
 			case 1:
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
-					create.setDeck(decks[0]);
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
+					select.setDeck(decks[0]);
 				}
 			
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
 				
 					// default test deck #2
-					create.setDeck(new Deck("Second"));
+					select.setDeck(new Deck("Second"));
 				}
 				
 				break;
 			case 2:
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
-					create.setDeck(decks[0]);
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
+					select.setDeck(decks[0]);
 				}
 					
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
-					create.setDeck(decks[1]);
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
+					select.setDeck(decks[1]);
 				}
 					
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
 
 					// default test deck #3
-					create.setDeck(new Deck("Third"));
+					select.setDeck(new Deck("Third"));
 				}
 				
 				break;
@@ -292,32 +293,32 @@ public class BuildDeckState extends GameState {
 				// case 3 = case 4
 			case 4:
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
-					create.setDeck(decks[0]);
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
+					select.setDeck(decks[0]);
 				}
 				
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
-					create.setDeck(decks[1]);
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
+					select.setDeck(decks[1]);
 				}
 					
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
-					create.setDeck(decks[2]);
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
+					select.setDeck(decks[2]);
 				}
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
-					gsm.setState(GameStateManager.CREATEDECK);
-					create = (CreateDeckState) gsm.getCurrentState();
+					gsm.setState(GameStateManager.SELECTELEMENTS);
+					select = (SelectElementsState) gsm.getCurrentState();
 					
 					if (NUM_DECKS == 4)
-						create.setDeck(decks[3]);
+						select.setDeck(decks[3]);
 					else
-						create.setDeck(new Deck("Fourth"));
+						select.setDeck(new Deck("Fourth"));
 				}
 				
 				break;

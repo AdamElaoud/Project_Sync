@@ -11,7 +11,7 @@ import entities.Card;
 import entities.Deck;
 import manager.*;
 
-public class FillDeckState extends GameState {
+public class SelectRunesState extends GameState {
 	
 	// Card list
 	private ArrayList<Card> allCards;
@@ -20,9 +20,9 @@ public class FillDeckState extends GameState {
 	private boolean full;
 	private Deck deck;
 	private Card[] cards;
-	private CreateDeckState create;
+	private SelectElementsState select;
 	
-	public FillDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+	public SelectRunesState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
 		super(gsm, mm, storage, vm);
 	}
 
@@ -92,9 +92,9 @@ public class FillDeckState extends GameState {
 		
 		// Back
 		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
-			gsm.setState(GameStateManager.CREATEDECK);
-			create = (CreateDeckState) gsm.getCurrentState();
-			create.setDeck(deck);
+			gsm.setState(GameStateManager.SELECTELEMENTS);
+			select = (SelectElementsState) gsm.getCurrentState();
+			select.setDeck(deck);
 		}
 	}
 

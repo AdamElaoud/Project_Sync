@@ -4,9 +4,9 @@ import java.awt.Graphics2D;
 
 import data.DataStorage;
 import gamestates.BuildDeckState;
-import gamestates.CreateDeckState;
+import gamestates.SelectElementsState;
 import gamestates.EndMatchState;
-import gamestates.FillDeckState;
+import gamestates.SelectRunesState;
 import gamestates.GameState;
 import gamestates.MenuState;
 import gamestates.PauseState;
@@ -41,8 +41,8 @@ public class GameStateManager {
 	public static final int STARTMATCH = 5;
 	public static final int SELECTDECK = 6;
 	public static final int BUILDDECK = 7;
-	public static final int CREATEDECK = 8;
-	public static final int FILLDECK = 9;
+	public static final int SELECTELEMENTS = 8;
+	public static final int SELECTRUNES = 9;
 	
 	// initialize the GSM
 	public GameStateManager() {
@@ -100,12 +100,12 @@ public class GameStateManager {
 				gameStates[state] = new BuildDeckState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
-			case CREATEDECK:
-				gameStates[state] = new CreateDeckState(this, mm, storage, vm);
+			case SELECTELEMENTS:
+				gameStates[state] = new SelectElementsState(this, mm, storage, vm);
 				gameStates[state].init();
 				break;
-			case FILLDECK:
-				gameStates[state] = new FillDeckState(this, mm, storage, vm);
+			case SELECTRUNES:
+				gameStates[state] = new SelectRunesState(this, mm, storage, vm);
 				gameStates[state].init();
 		}
 	}

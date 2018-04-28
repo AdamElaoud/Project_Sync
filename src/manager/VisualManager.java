@@ -50,7 +50,7 @@ public class VisualManager {
 //		g.setColor(Color.green);
 //		g.drawRect(x, y, (int)rect.getWidth(), (int)rect.getHeight());
 					
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.drawString(string, x + newX, y + newY);
 
 	}

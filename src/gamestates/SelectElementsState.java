@@ -3,6 +3,7 @@ package gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -11,13 +12,13 @@ import entities.Deck;
 import entities.Element;
 import manager.*;
 
-public class CreateDeckState extends GameState {
+public class SelectElementsState extends GameState {
 	
 	private static final int MAX_ELEMENTS = 8;
 	
 	// Deck
 	private Deck deck;
-	private FillDeckState fill;
+	private SelectRunesState fill;
 		
 	// Elements
 	private static final int PRIMARY = 0;
@@ -32,7 +33,7 @@ public class CreateDeckState extends GameState {
 			Element.Earth, Element.Shadow, Element.Water, Element.Air};
 	int count;
 
-	public CreateDeckState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
+	public SelectElementsState(GameStateManager gsm, MouseManager mm, DataStorage storage, VisualManager vm) {
 		super(gsm, mm, storage, vm);
 	}
 
@@ -62,37 +63,37 @@ public class CreateDeckState extends GameState {
 
 	public void render(Graphics2D g) {
 		// reset background
-		g.setColor(Color.darkGray);
+		g.setColor(Color.white);
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		
 		// setting font
-		g.setColor(Color.white);
-		g.setFont(new Font("Arial", Font.PLAIN, 140));
+		g.setColor(Color.black);
+		g.setFont(new Font("Courier", Font.PLAIN, 140));
 		
 		// TITLE
-		g.drawString("Deck Builder", (WIDTH * SCALE / 2) - 512 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
+		vm.centerText(g, "ELEMENT SELECT", 0, 0, new Rectangle(WIDTH * SCALE, (HEIGHT * SCALE / 5) + 250));
 		
 		// BACK
-		g.setFont(new Font("Arial", Font.PLAIN, 72));
+		g.setFont(new Font("Courier", Font.PLAIN, 72));
 		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
-			g.setColor(Color.cyan);
+			g.setColor(new Color(175, 242, 255, 255));
 			g.fillRect(48, 48, 256, 128);
 		}
-		g.setColor(Color.white);
-		g.drawString("Back", 96, 136);
+		g.setColor(Color.black);
+		vm.centerText(g, "Back", 48, 48, new Rectangle(256, 128));
 		g.drawRect(48, 48, 256, 128);
 		
 		// NEXT
 		if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128)) {
 			if (deck.getElement(PRIMARY) != null && deck.getElement(SECONDARY) != null && deck.getElement(TERTIARY) != null ) {
-				g.setColor(Color.cyan);
+				g.setColor(new Color(175, 242, 255, 255));
 			} else {
 				g.setColor(Color.lightGray);
 			}
 			
 			g.fillRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
 		}
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		g.drawString("Next", (WIDTH * SCALE) - 256, (HEIGHT * SCALE) - 90);
 		g.drawRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
 		
@@ -106,7 +107,7 @@ public class CreateDeckState extends GameState {
 		g.drawString("Name: " + deck.getName(), (WIDTH * SCALE) - 512, 128);
 		
 		// Permanent Selection
-		g.setColor(Color.lightGray);
+		g.setColor(new Color(204, 153, 0));
 		count = 0;
 		for (Element ele: elements) {
 			if (deck.getElement(PRIMARY) == ele) {
@@ -129,7 +130,7 @@ public class CreateDeckState extends GameState {
 			for (int j = 0; j < MAX_ELEMENTS; j++) {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
-					g.setColor(Color.lightGray);
+					g.setColor(new Color(204, 153, 0));
 					g.fillRect(256 + (j * 196) - 10, (HEIGHT * SCALE * i / 5) + 40, 148, 80);
 				}		
 				
@@ -172,13 +173,13 @@ public class CreateDeckState extends GameState {
 						break;
 					// Air
 					case 7:
-						g.setColor(Color.cyan);
+						g.setColor(new Color(175, 242, 255, 255));
 						g.fillRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
 						break;	
 				}
 								
-				g.setColor(Color.white);
-				g.drawRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
+				//g.setColor(Color.white);
+				//g.drawRect(256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64);
 			}
 		}
 		
@@ -213,8 +214,8 @@ public class CreateDeckState extends GameState {
 				ex.printStackTrace();
 			}
 			
-			gsm.setState(GameStateManager.FILLDECK);
-			fill = (FillDeckState) gsm.getCurrentState();
+			gsm.setState(GameStateManager.SELECTRUNES);
+			fill = (SelectRunesState) gsm.getCurrentState();
 			fill.setDeck(deck);
 		}
 		
