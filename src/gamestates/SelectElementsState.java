@@ -94,7 +94,7 @@ public class SelectElementsState extends GameState {
 			g.fillRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
 		}
 		g.setColor(Color.black);
-		g.drawString("Next", (WIDTH * SCALE) - 256, (HEIGHT * SCALE) - 90);
+		vm.centerText(g, "Next", (WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, new Rectangle(256, 128));
 		g.drawRect((WIDTH * SCALE) - 304, (HEIGHT * SCALE) - 176, 256, 128);
 		
 		// Primary
@@ -104,7 +104,7 @@ public class SelectElementsState extends GameState {
 		// Tertiary
 		g.drawString("Tertiary:", 256, (HEIGHT * SCALE * 4 / 5));
 		// Name
-		g.drawString("Name: " + deck.getName(), (WIDTH * SCALE) - 512, 128);
+		vm.centerText(g, "Name: " + deck.getName(), 0, 0, new Rectangle(WIDTH * SCALE, (HEIGHT * SCALE / 5) + 550));
 		
 		// Permanent Selection
 		g.setColor(new Color(204, 153, 0));
@@ -225,36 +225,68 @@ public class SelectElementsState extends GameState {
 				if (mm.within(mm.getMX(), mm.getmY(), 256 + (j * 196), (HEIGHT * SCALE * i / 5) + 48, 128, 64)) {
 					switch (j) {
 					case 0: 
-						deck.setElement(i - 2, Element.Time);
-						record[i - 2] = Element.Time;
+						if (deck.getElement(i - 2) == Element.Time)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Time);
+							record[i - 2] = Element.Time;
+						}
 						break;
 					case 1: 
-						deck.setElement(i - 2, Element.Fire);
-						record[i - 2] = Element.Fire;
+						if (deck.getElement(i - 2) == Element.Fire)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Fire);
+							record[i - 2] = Element.Fire;
+						}
 						break;
-					case 2: 
-						deck.setElement(i - 2, Element.Life);
-						record[i - 2] = Element.Life;
+					case 2:
+						if (deck.getElement(i - 2) == Element.Life)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Life);
+							record[i - 2] = Element.Life;
+						}
 						break;
 					case 3: 
-						deck.setElement(i - 2, Element.Thunder);
-						record[i - 2] = Element.Thunder;
+						if (deck.getElement(i - 2) == Element.Thunder)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Thunder);
+							record[i - 2] = Element.Thunder;
+						}
 						break;
 					case 4: 
-						deck.setElement(i - 2, Element.Earth);
-						record[i - 2] = Element.Earth;
+						if (deck.getElement(i - 2) == Element.Earth)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Earth);
+							record[i - 2] = Element.Earth;
+						}
 						break;
 					case 5: 
-						deck.setElement(i - 2, Element.Shadow);
-						record[i - 2] = Element.Shadow;
+						if (deck.getElement(i - 2) == Element.Shadow)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Shadow);
+							record[i - 2] = Element.Shadow;
+						}
 						break;
 					case 6: 
-						deck.setElement(i - 2, Element.Water);
-						record[i - 2] = Element.Water;
+						if (deck.getElement(i - 2) == Element.Water)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Water);
+							record[i - 2] = Element.Water;
+						}
 						break;
 					case 7: 
-						deck.setElement(i - 2, Element.Air);
-						record[i - 2] = Element.Air;
+						if (deck.getElement(i - 2) == Element.Air)
+							deck.setElement(i - 2, null);
+						else {
+							deck.setElement(i - 2, Element.Air);
+							record[i - 2] = Element.Air;
+						}
 						break;
 					}
 					

@@ -57,7 +57,7 @@ public class BuildDeckState extends GameState {
 		}
 				
 		System.out.println("Num Decks: " + NUM_DECKS);
-		System.out.println("Decks: " + decks[0] + " " + decks[1] + " " + decks[2] + " " + decks[3]);
+		System.out.println("Decks: " + decks[0].getName() + ", " + decks[1].getName() + ", " + decks[2].getName() + ", " + decks[3].getName());
 		
 	}
 

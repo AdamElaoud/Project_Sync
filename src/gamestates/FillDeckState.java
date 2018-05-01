@@ -1,6 +1,9 @@
 package gamestates;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
 import data.DataStorage;
@@ -34,7 +37,23 @@ public class FillDeckState extends GameState {
 	}
 
 	public void render(Graphics2D g) {
+		// reset background
+		g.setColor(Color.white);
+		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		
+		// setting font
+		g.setColor(Color.black);
+		g.setFont(new Font("Courier", Font.PLAIN, 140));
+				
+		// BACK
+		g.setFont(new Font("Courier", Font.PLAIN, 72));
+		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
+			g.setColor(new Color(175, 242, 255, 255));
+			g.fillRect(48, 48, 256, 128);
+		}
+		g.setColor(Color.black);
+		vm.centerText(g, "Back", 48, 48, new Rectangle(256, 128));
+		g.drawRect(48, 48, 256, 128);
 	}
 	
 	public void setDeck(Deck deck) {

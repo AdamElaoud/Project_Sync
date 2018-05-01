@@ -81,7 +81,10 @@ public class Deck implements Serializable {
 	}
 	
 	public String getName() {
-		return name;
+		if (name == null)
+			return "null";
+		else
+			return name;
 	}
 	
 	public void setElement(int selection, Element ele) {
