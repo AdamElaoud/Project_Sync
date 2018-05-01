@@ -18,7 +18,7 @@ public class SelectElementsState extends GameState {
 	
 	// Deck
 	private Deck deck;
-	private SelectRunesState fill;
+	private FillDeckState fill;
 		
 	// Elements
 	private static final int PRIMARY = 0;
@@ -214,8 +214,8 @@ public class SelectElementsState extends GameState {
 				ex.printStackTrace();
 			}
 			
-			gsm.setState(GameStateManager.SELECTRUNES);
-			fill = (SelectRunesState) gsm.getCurrentState();
+			gsm.setState(GameStateManager.FILLDECK);
+			fill = (FillDeckState) gsm.getCurrentState();
 			fill.setDeck(deck);
 		}
 		

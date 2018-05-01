@@ -3,18 +3,7 @@ package manager;
 import java.awt.Graphics2D;
 
 import data.DataStorage;
-import gamestates.BuildDeckState;
-import gamestates.SelectElementsState;
-import gamestates.EndMatchState;
-import gamestates.SelectRunesState;
-import gamestates.GameState;
-import gamestates.MenuState;
-import gamestates.PauseState;
-import gamestates.PlayTurnState;
-import gamestates.SelectCardState;
-import gamestates.SelectDeckState;
-import gamestates.StartMatchState;
-import gamestates.StartupState;
+import gamestates.*;
 
 public class GameStateManager {
 
@@ -32,7 +21,7 @@ public class GameStateManager {
 	private int currentState;
 	private int previousState;
 	
-	public static final int NUM_STATES = 10;
+	public static final int NUM_STATES = 11;
 	public static final int STARTUP = 0;
 	public static final int MENU = 1;
 	public static final int SELECTCARD = 2;
@@ -43,6 +32,7 @@ public class GameStateManager {
 	public static final int BUILDDECK = 7;
 	public static final int SELECTELEMENTS = 8;
 	public static final int SELECTRUNES = 9;
+	public static final int FILLDECK = 10;
 	
 	// initialize the GSM
 	public GameStateManager() {
@@ -106,6 +96,9 @@ public class GameStateManager {
 				break;
 			case SELECTRUNES:
 				gameStates[state] = new SelectRunesState(this, mm, storage, vm);
+				gameStates[state].init();
+			case FILLDECK:
+				gameStates[state] = new FillDeckState(this, mm, storage, vm);
 				gameStates[state].init();
 		}
 	}

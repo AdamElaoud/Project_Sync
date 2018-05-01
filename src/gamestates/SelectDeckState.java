@@ -3,6 +3,7 @@ package gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -62,39 +63,39 @@ public class SelectDeckState extends GameState {
 
 	public void render(Graphics2D g) {
 		// reset background
-		g.setColor(Color.darkGray);
+		g.setColor(Color.white);
 		g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 		
 		// setting font
-		g.setColor(Color.white);
-		g.setFont(new Font("Arial", Font.PLAIN, 140));
+		g.setColor(Color.black);
+		g.setFont(new Font("courier", Font.PLAIN, 140));
 		
-		// MENU
-		g.drawString("Select Deck", (WIDTH * SCALE / 2) - 488 + (WIDTH * SCALE / 16), (HEIGHT * SCALE / 5) + 42);
+		// TITLE
+		vm.centerText(g, "SELECT A DECK", 0, 0, new Rectangle(WIDTH * SCALE, (HEIGHT * SCALE / 5) + 250));
 		
 		// BACK
-		g.setFont(new Font("Arial", Font.PLAIN, 72));
+		g.setFont(new Font("courier", Font.PLAIN, 72));
 		if (mm.within(mm.getMX(), mm.getmY(), 48, 48, 256, 128)) {
-			g.setColor(Color.cyan);
+			g.setColor(new Color(175, 242, 255, 255));
 			g.fillRect(48, 48, 256, 128);
 		}
-		g.setColor(Color.white);
-		g.drawString("Back", 96, 136);
+		g.setColor(Color.black);
+		vm.centerText(g, "Back", 48, 48, new Rectangle(256, 128));
 		g.drawRect(48, 48, 256, 128);
 		
 		// reset font for decks
-		g.setFont(new Font("Arial", Font.PLAIN, 48));
+		g.setFont(new Font("courier", Font.PLAIN, 48));
 		
 		switch(NUM_DECKS) {
 			case 0: 
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-					g.setColor(Color.cyan);
+					g.setColor(new Color(175, 242, 255, 255));
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				}
 			
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, "No Decks", (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
 			
@@ -102,12 +103,12 @@ public class SelectDeckState extends GameState {
 			case 1:
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
-					g.setColor(Color.cyan);
+					g.setColor(new Color(175, 242, 255, 255));
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				}
 			
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
 			
@@ -116,24 +117,24 @@ public class SelectDeckState extends GameState {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - vm.dW - (vm.dist / 2), iconHeight, vm.getDeckBox());
 				
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
 				
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
 								
@@ -142,36 +143,36 @@ public class SelectDeckState extends GameState {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2) - vm.dist - vm.dW, iconHeight, vm.getDeckBox());
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				}	
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) - (vm.dW / 2), iconHeight, vm.getDeckBox());
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[2].getName(), (WIDTH * SCALE / 2) + (vm.dW / 2) + vm.dist, iconHeight, vm.getDeckBox());
 				
@@ -180,48 +181,48 @@ public class SelectDeckState extends GameState {
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - (vm.dW * 2) - vm.dist, iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[0].getName(), (WIDTH * SCALE / 2) - (3 * vm.dist / 2) - (vm.dW * 2), iconHeight, vm.getDeckBox());
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[1].getName(), (WIDTH * SCALE / 2) - (vm.dist / 2) - vm.dW, iconHeight, vm.getDeckBox());
 					
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.dW, vm.dH);
 				vm.centerText(g, decks[2].getName(), (WIDTH * SCALE / 2) + (vm.dist / 2), iconHeight, vm.getDeckBox());
 				
 				// Highlight
 				if (mm.within(mm.getMX(), mm.getmY(), (WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH)) {
 					// Color set
-					g.setColor(Color.cyan);							
+					g.setColor(new Color(175, 242, 255, 255));							
 					g.fillRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
 				}
 					
 				// Label
-				g.setColor(Color.white);
+				g.setColor(Color.black);
 				g.drawRect((WIDTH * SCALE / 2) + (3 * vm.dist / 2) + vm.dW, iconHeight, vm.dW, vm.dH);
 				
 				if (NUM_DECKS == 4)
