@@ -6,9 +6,9 @@ First
 Primary: 
 Time
 Secondary: 
-Time
+Fire
 Tertiary: 
-Time
+Fire
 Cards:
 Cards End
 DECK END
@@ -18,11 +18,11 @@ ID:
 Name: 
 Second
 Primary: 
-Fire
+Water
 Secondary: 
-Fire
+Water
 Tertiary: 
-Fire
+Water
 Cards:
 Cards End
 DECK END
@@ -32,11 +32,11 @@ ID:
 Name: 
 Third
 Primary: 
-Life
+Shadow
 Secondary: 
-Life
+Shadow
 Tertiary: 
-Life
+Shadow
 Cards:
 Cards End
 DECK END
@@ -46,11 +46,11 @@ ID:
 Name: 
 Fourth
 Primary: 
-Thunder
+Earth
 Secondary: 
-Thunder
+Earth
 Tertiary: 
-Thunder
+Earth
 Cards:
 Cards End
 DECK END

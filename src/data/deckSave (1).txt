@@ -1,0 +1,14 @@
+DECK START
+ID: 
+1 
+Name: 
+First     
+Primary: 
+Time 
+Secondary: 
+Time 
+Tertiary: 
+Time 
+Cards: 
+Cards End
+DECK END
