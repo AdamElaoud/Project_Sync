@@ -4,7 +4,7 @@ Weekly DevLogs posted at: https://adamelaoud.tumblr.com/
 
 
 
-(large scope ideas)
+# (large scope ideas)
 # MMORPG Design Concepts
 Income Components:
 
