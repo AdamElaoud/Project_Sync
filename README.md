@@ -1,7 +1,7 @@
 # Project_Sync
 Weekly DevLogs posted at: https://adamelaoud.tumblr.com/
 
-# Future Design Plans
+# MMORPG Design Concepts
 Income Components:
 
 	- Intense crafting 
